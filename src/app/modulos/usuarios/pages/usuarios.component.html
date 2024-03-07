@@ -1,0 +1,82 @@
+<app-navbar>
+    <div class="page-content">
+        <div class="button-container">
+            <button type="button" icon="pi pi-plus" 
+                pButton label="Agregar" 
+                class="p-button other-button"
+                (click)="redirigirAlta()"
+            >
+            </button>
+        </div>
+        
+        
+        <p-table
+            [value]="usuarios"
+            [paginator]="true"
+            [rows]="30"
+            [showCurrentPageReport]="true"
+            [tableStyle]="{ 'min-width': '50rem', 'padding': '15px' }"
+            currentPageReportTemplate="Mostrando {first} a {last}. {totalRecords} registros totales."
+            [rowsPerPageOptions]="[5, 10, 25, 50]"
+            class="tableListado"
+        >
+            <ng-template pTemplate="header" >
+                <tr>
+                    <th style="width:4%" class="column">
+                        #
+                    </th>
+                    <th style="width:4%" class="column">
+                        Nombre
+                    </th>
+                    <th style="width:4%" class="column">
+                        Correo
+                    </th>
+                    <th style="width:4%" class="column">
+                        Teléfono
+                    </th>
+                    <th style="width:4%" class="column">
+                        Usuario
+                    </th>
+                    <th style="width:4%" class="column">
+                        Detalle
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-i>
+                <tr>
+                    <td class="rows">{{ i.id_usuario }}</td>
+                    <td class="rows">{{ i.nombre }}</td>
+                    <td class="rows">{{ i.correo }}</td>
+                    <td class="rows">{{ i.telefono }}</td>
+                    <td class="rows">{{ i.cuenta_usuario }}</td>
+                    <td class="rows">
+                        <div class="row">
+                            <div class="col-6">
+                                <button pButton class="p-button-warning"
+                                icon="fas fa-key" (click)="redirigirPermisosId(i.id_usuario)"
+                                >
+                                </button>
+                            </div>
+                            <div class="col-6">
+                                <button pButton class="p-button-success"
+                                icon="fas fa-edit" (click)="redirigirDetalleId(i.id_usuario)"
+                                >
+                                </button>
+                            </div>
+                        </div>
+                        
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="paginatorleft">
+        
+            </ng-template>
+            <ng-template pTemplate="paginatorright">
+        
+            </ng-template>
+        </p-table>
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    </div>
+</app-navbar>
+
+<p-toast></p-toast>

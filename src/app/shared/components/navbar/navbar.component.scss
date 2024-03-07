@@ -1,0 +1,179 @@
+/* inicio.component.css */
+.container1 {
+  display: flex;
+  height: 100vh; /* Utiliza toda la altura de la pantalla */
+  margin: 0;
+  padding:0;
+}
+
+::ng-deep body{
+  margin:0 !important;
+}
+
+.sidebar {
+  background-color: transparent;
+  color: white;
+  width: 30%;
+  height: 100%; /* Toma toda la altura disponible */
+  padding: 15px;
+  border-right: 1px solid white;
+}
+
+.main-content {
+  background-color: rgb(231, 228, 228);;
+  width: 100%;
+  height: 100%; /* Toma toda la altura disponible */
+}
+
+/* */
+
+.sidebar {
+  width: 20%;
+  background-color: black;
+  color: white;
+  height: 100vh;
+  padding: 15px;
+}
+
+.sidebar h2, .sidebar a {
+  color: white; /* Asegura que el texto es blanco */
+}
+
+.sidebar hr {
+  border-color: white; /* Hace el divisor de color blanco */
+  margin: 10px 0; /* Espaciado superior e inferior del divisor */
+}
+
+.sidebar ul {
+  list-style-type: none; /* Elimina los puntos de la lista */
+  padding: 0; /* Elimina el padding por defecto de la lista */
+}
+
+.sidebar ul li a {
+  text-decoration: none; /* Elimina el subrayado de los enlaces */
+  color: white; /* Establece el color del texto de los enlaces */
+  display: block; /* Hace que el enlace ocupe todo el espacio del li, facilitando el clic */
+  padding: 15px; /* Espaciado interno para cada elemento de la lista */
+  font-size: 20px;
+}
+
+ul {
+  list-style-type: none; /* Elimina los marcadores de lista predeterminados */
+  padding-left: 0; /* Elimina el padding izquierdo para alinear con el inicio del contenedor */
+}
+
+.container-item {
+  display: flex; /* Usa flexbox para alinear ícono y texto */
+  align-items: center; /* Centra los elementos verticalmente */
+  padding: 5px;
+}
+.container-item:hover{
+  background-color: rgb(175, 175, 175);
+}
+.container-item i {
+  margin-right: 8px; /* Añade espacio entre el ícono y el texto */
+  font-size: 25px;
+}
+
+.container-item a {
+  text-decoration: none; /* Opcional: elimina el subrayado del enlace */
+  color: inherit; /* Opcional: utiliza el color de texto del elemento padre */
+}
+
+.menu-bar {
+  display: flex;
+  height: 80px;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black; /* O cualquier color que desees para el fondo de la barra del menú */
+  padding: 0 15px; /* Ajusta el padding según necesites */
+  color: white; /* Color del texto */
+}
+
+.menu-bar h2 {
+  margin: 0; /* Elimina los márgenes por defecto del h2 para un mejor control */
+}
+
+.user-button {
+  background-color: transparent; /* Fondo transparente */
+  border: none; /* Elimina el borde */
+  color: white; /* Icono de color blanco */
+  cursor: pointer; /* Cambia el cursor a pointer al pasar sobre el botón */
+  padding-right: 40px;
+}
+
+.user-button i {
+  font-size: 25px; /* Ajusta el tamaño del icono según necesites */
+}
+
+
+/////////
+/// 
+/// 
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  position: absolute;
+  background-color: rgb(245, 245, 245);
+  color: black;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  width: 100px;
+  left: 50%;
+  transform: translateX(-65%);
+  padding: 5px;
+  padding-top: 10px;
+}
+
+.dropdown-content .option {
+  width: 100%;
+  background-color: rgb(245, 245, 245);
+  box-sizing: border-box; /* Incluye el padding en el cálculo del ancho */
+  padding: 3px 5px; /* Ajuste opcional para dar más espacio dentro de .option */
+  cursor: pointer; /* Cambia el cursor a pointer */
+  transition: background-color 0.3s, color 0.3s;
+  justify-content: center;
+  display:flex;
+}
+
+.option span {
+  text-align: center;
+}
+
+.dropdown-content .option:hover {
+  background-color: black;
+  color: white;
+}
+// .dropdown:hover .dropdown-content {
+//   display: block;
+// }
+
+.title_navbar{
+  cursor: pointer; /* Cambia el cursor a pointer */
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.container_general{
+  padding: 10px;
+}
+
+:host ::ng-deep .breadcrumb-style .p-breadcrumb,:host ::ng-deep .breadcrumb-style .p-menuitem-icon {
+  /* Estilos específicos para el breadcrumb */
+  font-size: 14px;
+  /* Otros estilos que desees aplicar */
+}
+
+:host ::ng-deep .breadcrumb-style .p-menuitem-icon{
+  margin-right: 10px;
+}
+
+::ng-deep .p-breadcrumb.p-component{
+  margin-bottom: 10px;
+}
+
+body{
+  background-color: rgb(231, 228, 228);;
+}

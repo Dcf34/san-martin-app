@@ -1,0 +1,48 @@
+
+<div class="container1">
+    <div class="sidebar">
+        <h3 (click)="navegarPortal()" class="title_navbar">Mariscos "San Martin"</h3>
+        <hr>
+        <ul>
+            <li (click)="abrirModulo('usuarios')" class="container-item title_navbar"><i class="fas fa-user"></i><a> Usuarios</a></li>
+            <li class="container-item title_navbar"><i class="fas fa-users"></i><a> Clientes</a></li>
+            <li class="container-item title_navbar"><i class="pi pi-apple"></i><a> Comidas</a></li>
+            <li class="container-item title_navbar"><i class="fas fa-cogs"></i><a> Configuración</a></li>
+            <li class="container-item title_navbar"><i class="fas fa-cash-register"></i><a> Nueva Venta</a></li>
+            <li class="container-item title_navbar"><i class="fas fa-cart-plus"></i><a> Historial Ventas</a></li>
+
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="menu-bar">
+            <h2 (click)="navegarPortal()" class="title_navbar">INICIO</h2>
+            <!-- <button class="user-button"><i class="fas fa-user"></i></button> -->
+            <div class="dropdown">
+                <button class="user-button" (click)="mostrarBtnClose()"><i class="fas fa-user"></i></button>
+                <div class="dropdown-content" *ngIf="mostrarDropdown">
+                    <div class="option">
+                        <span>Cerrar Sesión</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="container_general">
+
+            <p-breadcrumb class="max-w-full breadcrumb-style" [model]="itemsBreadCrumb" [home]="home"></p-breadcrumb>
+
+            <ng-content select=".page-content">
+
+            </ng-content>
+
+        </div>
+
+        <footer>
+            <ng-content select=".footer-content">
+
+            </ng-content>
+        </footer>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+
+<app-navbar>
+    <div class="page-content">
+
+        <div class="row" style="width: 100%;">
+            <div class="col-md-6 mx-auto">
+                <div class="card shadow-lg">
+                    <div class="card-header card-header-primary">
+                        Permisos
+                    </div>
+                    <div class="card-body">
+                        
+                        <div *ngFor="let permiso of permisos; let i = index" class="form-check form-check-inline m-4">
+                            <label for="permisos" class="p-2 text-uppercase">{{permiso.nombre}}</label>
+                            <input id="permisos" type="checkbox" name="permisos" [value]="permiso.id_permiso" [checked]="permisosSelected.includes(permiso.id_permiso ?? 0)"
+                            (change)="onCheckboxChange($event, permiso.id_permiso ?? 0)">
+                        </div>
+
+                        <br>
+                        <button (click)="guardar()" class="btn btn-primary btn-block" type="button">Modificar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</app-navbar>
+
+<p-toast></p-toast>

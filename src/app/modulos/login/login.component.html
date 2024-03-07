@@ -1,0 +1,64 @@
+<p-progressBar mode="indeterminate" *ngIf="cargando"></p-progressBar>
+<div class="container">
+  <div class="overlay-container1">
+    <div class="overlay">
+      <div class="overlay-panel overlay-right">
+        <div class="flex-container">
+        </div>
+        <div>
+            <h1 style="text-align: center; font-size: 50px;">Mariscos "San Martín"</h1>
+            <img src="../../../assets/img/logo_san_martin.png" style="height: 200px; padding-top: 50px;">
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-container1">
+    <form action="" ngForm>
+      <h1 style="margin-bottom: 0.3em">Inicio de Sesión</h1>
+      <span class="p-input-icon-left p-float-label" style="width: 100%; margin: 1em">
+        <i class="pi pi-user"></i>
+        <input
+          id="float-usuario"
+          class="full-wd"
+          pInputText
+          required
+          (input)="onChangeUsuario($event)"
+          [(ngModel)]="sesion.Usuario"
+          name="usuario_id"
+        />
+        <label for="float-usuario" *ngIf="mostrarLabelUsuario">Usuario</label>
+      </span>
+      <span class="p-input-icon-left p-float-label" style="width: 100%">
+        <i class="pi pi-key"></i>
+        <input
+          id="float-pass"
+          class="full-wd"
+          pInputText
+          [required]="true"
+          [type]="typeInput"
+          (input)="onChangePass($event)"
+          [(ngModel)]="sesion.Clave"
+          name="contrasenia"
+        />
+        <label for="float-pass" *ngIf="mostrarLabelPass">Contraseña</label>
+      </span>
+      <div class="p-field-checkbox" style="margin-top: 1em">
+        <p-checkbox [binary]="true" (onChange)="mostrarContrasenia($event)" inputId="binary"></p-checkbox>
+        <label for="binary" style="margin-left: 0.5em"> Mostrar contraseña</label>
+      </div>
+      <button
+        pButton
+        pRipple
+        label="Autenticar"
+        class="p-button-rounded"
+        [disabled]="cargando || (!sesion.Usuario || sesion.Usuario === '' || !sesion.Clave || sesion.Clave === '' )"
+        (click)="autenticar()"
+        type="submit"
+      >
+      </button>
+      
+    </form>
+  </div>
+  <p-toast></p-toast>
+</div>

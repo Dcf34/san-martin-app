@@ -1,0 +1,84 @@
+/* Estilos existentes */
+.rows {
+    text-align: center;
+  }
+  
+  .column {
+    text-align: center;
+  }
+
+
+//-- Contenido--//
+
+
+.fullWidthDiv {
+  width: 100%;
+}
+
+.fullWidthDiv h1 {
+  width: 100%; /* Ocupa el ancho completo del div */
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+}
+
+.menu-item i {
+  margin-right: 8px; /* Espacio entre el icono y el texto */
+}
+
+.menu-item .icon {
+  font-size: 24px; /* Cambia el tamaño de los íconos */
+}
+
+.circular-button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent !important;
+  font-size: 2rem !important;
+  color: black !important;
+}
+
+.circular-button {
+  border: 3px solid black !important;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 20px; 
+  padding: 10px;
+}
+
+.other-button {
+  margin-left: 10px;
+  height: 30px;
+  background-color: black !important;
+  border: 1px solid black !important;
+}
+
+.other-button:hover {
+  border: 3px solid rgb(83, 83, 83) !important;
+}
+
+::ng-deep .p-dialog .p-dialog-header{
+  background-color: rgb(194, 45, 45);
+}
+
+::ng-deep .p-element.tableListado .p-datatable .p-datatable-tbody > tr > td {
+  padding: 5px; 
+  text-align: center;
+  font-size: 14px;
+  color:black;
+}
+
+::ng-deep .p-element.tableListado .p-datatable .p-datatable-thead > tr > th{
+    background-color: black;
+    text-align: center;
+    color: white;
+  }

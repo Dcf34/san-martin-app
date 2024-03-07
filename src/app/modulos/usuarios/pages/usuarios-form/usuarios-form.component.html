@@ -1,0 +1,108 @@
+
+<app-navbar>
+    <div class="page-content">
+        <div class="container-buttons d-flex justify-content-end"
+        >
+            <button pButton icon="pi pi-trash" 
+                class="p-button-danger buttonEliminar"
+                *ngIf="esEdicion && usuario.activo"
+            >
+            </button>
+            <button pButton icon="pi pi-save" 
+                *ngIf="esEdicion && usuario.activo || !esEdicion"
+                label="Guardar" 
+                (click)="guardar()"
+                class="p-button-success btnSave"
+                [disabled]="desactivarBtnGuardar()"
+            >
+            </button>
+        </div>
+
+        <div class="container_white">
+            <div class="row">
+                <div class="col-12">
+                    <h1>Datos Generales:</h1>
+                </div>
+                <div class="col-6">
+                    <span class="p-float-label" style="width: 100%; margin: 1em">
+                        <input
+                          id="float-nombre"
+                          class="full-wd greyInput"
+                          pInputText
+                          required
+                          [(ngModel)]="usuario.nombre"
+                          name="user_nombre"
+                        />
+                        <label for="float-nombre">Nombre</label>
+                    </span>
+                </div>
+
+                <div class="col-6">
+                    <span class="p-float-label" style="width: 100%; margin: 1em">
+                        <input
+                          id="float-correo"
+                          class="full-wd greyInput"
+                          pInputText
+                          required
+                          name="user_correo"
+                          [(ngModel)]="usuario.correo"
+                        />
+                        <label for="float-nombre">Correo</label>
+                    </span>
+                </div>
+
+                <div class="col-6">
+                    <span class="p-float-label" style="width: 100%; margin: 1em">
+                        <input
+                          id="float-telefono"
+                          class="full-wd greyInput"
+                          pInputText
+                          type="number"
+                          required
+                          name="user_telefono"
+                          [(ngModel)]="usuario.telefono"
+                        />
+                        <label for="float-nombre">Teléfono</label>
+                    </span>
+                </div>
+
+                <div class="col-6">
+                    <span class="p-float-label" style="width: 100%; margin: 1em">
+                        <input
+                          id="float-usuario"
+                          class="full-wd greyInput"
+                          pInputText
+                          required
+                          name="user_usuario"
+                          [(ngModel)]="usuario.cuenta_usuario"
+                        />
+                        <label for="float-nombre">Usuario</label>
+                    </span>
+                </div>
+
+                <div class="col-6">
+                    <span class="p-float-label" style="width: 100%; margin: 1em">
+                        <input
+                          id="float-clave"
+                          class="full-wd greyInput"
+                          pInputText
+                          required
+                          type="password"
+                          name="user_clave"
+                          [(ngModel)]="nuevaClave"
+                        />
+                        <label for="float-nombre">Contraseña</label>
+                    </span>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</app-navbar>
+
+<p-toast></p-toast>
+
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
