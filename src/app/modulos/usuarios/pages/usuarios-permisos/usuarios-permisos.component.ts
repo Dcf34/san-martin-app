@@ -186,9 +186,6 @@ export class EdicionUsuariosPermisosComponent implements OnInit{
     }
 
     guardar(){
-        console.log('selected', this.permisosSelected);
-        console.log('deleted', this.permisosEliminados);
-
         //Mandamos solo los nuevos permisos y los que se vayan a eliminar
 
         const permisosUsuario: PermisoUsuario[] = [];
@@ -240,6 +237,8 @@ export class EdicionUsuariosPermisosComponent implements OnInit{
             });
         }
 
+        this.cargando = true;
+
         this.usuariosService
         .setPermisosUsuario(permisosUsuario)
         .pipe(takeUntil(this.unsubscribe$))
@@ -259,7 +258,6 @@ export class EdicionUsuariosPermisosComponent implements OnInit{
             }
         });
 
-        console.log('permisos a mandar', permisosUsuario);
     }
 
     // async actualizarUsuario(usuarioModificacion: UsuarioActualizacionDto){

@@ -1,7 +1,9 @@
 
 <app-navbar>
     <div class="page-content">
-
+        <p-progressBar mode="indeterminate" *ngIf="cargando"></p-progressBar>
+        <br *ngIf="cargando">
+        
         <div class="row" style="width: 100%;">
             <div class="col-md-6 mx-auto">
                 <div class="card shadow-lg">

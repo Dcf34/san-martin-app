@@ -77,5 +77,13 @@ export class UsuariosService {
     return this.api.postHttp<Ejecucion>(url, permisosUsuario);
   }
 
+  public deleteUsuario(id_usuario: number){
+    const url = `${this.seccion}/delete?`+
+                `id_usuario=${cleanParamNum(id_usuario)}`
+    ;
+
+    return this.api.deleteHttp<Ejecucion>(url);
+  }
+
   
 }

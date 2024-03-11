@@ -4,6 +4,8 @@
   height: 100vh; /* Utiliza toda la altura de la pantalla */
   margin: 0;
   padding:0;
+  overflow: hidden; /* Previene el desbordamiento en el contenedor principal */
+
 }
 
 ::ng-deep body{
@@ -17,12 +19,15 @@
   height: 100%; /* Toma toda la altura disponible */
   padding: 15px;
   border-right: 1px solid white;
+  overflow-y: hidden; /* Asegura que la barra lateral no sea desplazable */
+
 }
 
 .main-content {
   background-color: rgb(231, 228, 228);;
   width: 100%;
   height: 100%; /* Toma toda la altura disponible */
+  overflow-y: auto; /* Habilita el desplazamiento vertical si el contenido excede la altura */
 }
 
 /* */
@@ -71,8 +76,10 @@ ul {
   background-color: rgb(175, 175, 175);
 }
 .container-item i {
-  margin-right: 8px; /* Añade espacio entre el ícono y el texto */
+  margin-right: 14px; /* Añade espacio entre el ícono y el texto */
   font-size: 25px;
+  width: 30px;
+  text-align: center;
 }
 
 .container-item a {
@@ -88,6 +95,9 @@ ul {
   background-color: black; /* O cualquier color que desees para el fondo de la barra del menú */
   padding: 0 15px; /* Ajusta el padding según necesites */
   color: white; /* Color del texto */
+  position: fixed; /* Hace que la barra de menú se fije en la posición */
+  width: 70%;
+
 }
 
 .menu-bar h2 {
@@ -176,4 +186,88 @@ ul {
 
 body{
   background-color: rgb(231, 228, 228);;
+}
+
+
+
+.main-content {
+  margin-top: 80px; /* Empuja el contenido principal para empezar justo debajo del menú */
+  overflow-y: auto; /* Permite el desplazamiento dentro de este contenedor */
+  height: calc(100vh - 80px); /* Ajusta la altura para que el contenido no se desborde de la ventana */
+  position: relative; /* Asegura un flujo de documento normal después del menú fijo */
+  width: 80%;
+
+}
+
+.menu-bar {
+  display: flex;
+  height: 80px; /* Altura del menú */
+  justify-content: space-between;
+  align-items: center;
+  background-color: black;
+  padding: 0 15px;
+  color: white;
+  position: fixed;
+  top: 0;
+  left: 20%;
+  width: 80%;
+  z-index: 1000; /* Asegura que el menú se mantenga encima del contenido */
+}
+
+@media (max-width: 1000px) {
+  .sidebar {
+    display: none;
+  }
+
+  .menu-bar{
+    width: 100%;
+    left:0;
+  }
+
+  .main-content{
+    width: 100%;
+  }
+}
+
+.btnMenu{
+  background-color: transparent;
+  border: none;
+}
+
+::ng-deep .btnMenu .p-button-icon{
+  font-size: 20px;
+}
+
+::ng-deep button.p-element.btnMenu:focus {
+  outline: none;
+  background-color: transparent;
+}
+
+::ng-deep .p-button:enabled:hover {
+  background: transparent; 
+  color: #ffffff; 
+  border-color: transparent;
+}
+
+.container_header_sidebar{
+  h3{
+    text-align: center;
+    color:white;
+  }
+}
+
+::ng-deep .p-sidebar .p-sidebar-header{
+  padding: 5px;
+  border-bottom: 1px solid white;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+::ng-deep .p-sidebar{
+  background-color: black;
+  color:white;
+}
+
+.item_sidebar{
+  padding: 20px;
 }

@@ -9,17 +9,15 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { MessageService } from 'primeng/api';
 import { MensajesService } from 'src/app/core/services/mensajes.service';
 import { DatePipe } from '@angular/common';
+import { NavbarModule } from '../../shared/components/navbar/navbar.module';
 import { TableModule } from 'primeng/table';
-import { EdicionUsuariosComponent } from './usuarios-form.component';
-import { NavbarModule } from 'src/app/shared/components/navbar/navbar.module';
-import { InputTextModule } from 'primeng/inputtext';
 import { MessagesModule } from 'primeng/messages';
-import { DeleteUsuarioComponent } from '../../modals/delete-usuario.component';
+import { ConfiguracionRoutingModule } from './configuracion-routing.module';
+import { ConfiguracionComponent } from './pages/configuracion.component';
 
 @NgModule({
   declarations: [
-    EdicionUsuariosComponent,
-    DeleteUsuarioComponent
+    ConfiguracionComponent
   ],
   imports: [
     CommonModule,
@@ -30,10 +28,10 @@ import { DeleteUsuarioComponent } from '../../modals/delete-usuario.component';
     FormsModule,
     NavbarModule,
     TableModule,
-    InputTextModule,
-    MessagesModule, ProgressBarModule
+    MessagesModule,
+    ConfiguracionRoutingModule
   ],
   providers: [DialogService,
     MessageService, MensajesService, DatePipe]
 })
-export class UsuariosFormModule { }
+export class ConfiguracionModule { }

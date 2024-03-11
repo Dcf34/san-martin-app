@@ -8,12 +8,12 @@
         >
             <button pButton icon="pi pi-trash" 
                 class="p-button-danger buttonEliminar"
-                *ngIf="esEdicion && usuario.activo"
-                (click)="abrirModalEliminarUsuario()"
+                *ngIf="esEdicion && cliente.activo"
+                (click)="abrirModalEliminarCliente()"
             >
             </button>
             <button pButton icon="pi pi-save" 
-                *ngIf="esEdicion && usuario.activo || !esEdicion"
+                *ngIf="esEdicion && cliente.activo || !esEdicion"
                 label="Guardar" 
                 (click)="guardar()"
                 class="p-button-success btnSave"
@@ -34,24 +34,10 @@
                           class="full-wd greyInput"
                           pInputText
                           required
-                          [(ngModel)]="usuario.nombre"
-                          name="user_nombre"
+                          [(ngModel)]="cliente.nombre"
+                          name="cli_nombre"
                         />
                         <label for="float-nombre">Nombre</label>
-                    </span>
-                </div>
-
-                <div class="col-6">
-                    <span class="p-float-label" style="width: 100%; margin: 1em">
-                        <input
-                          id="float-correo"
-                          class="full-wd greyInput"
-                          pInputText
-                          required
-                          name="user_correo"
-                          [(ngModel)]="usuario.correo"
-                        />
-                        <label for="float-nombre">Correo</label>
                     </span>
                 </div>
 
@@ -63,39 +49,23 @@
                           pInputText
                           type="number"
                           required
-                          name="user_telefono"
-                          [(ngModel)]="usuario.telefono"
+                          name="cli_telefono"
+                          [(ngModel)]="cliente.telefono"
                         />
                         <label for="float-nombre">Teléfono</label>
                     </span>
                 </div>
 
-                <div class="col-6">
+                <div class="col-12">
                     <span class="p-float-label" style="width: 100%; margin: 1em">
-                        <input
-                          id="float-usuario"
-                          class="full-wd greyInput"
-                          pInputText
-                          required
-                          name="user_usuario"
-                          [(ngModel)]="usuario.cuenta_usuario"
-                        />
-                        <label for="float-nombre">Usuario</label>
-                    </span>
-                </div>
+                        <textarea id="observaciones" name="observaciones" 
+                            class="form-control full-width-textarea" rows="4" style="width: 95%;" 
+                            pInputTextarea [autoResize]="true" 
+                            [(ngModel)]="cliente.direccion"
+                        >
+                        </textarea>
 
-                <div class="col-6">
-                    <span class="p-float-label" style="width: 100%; margin: 1em">
-                        <input
-                          id="float-clave"
-                          class="full-wd greyInput"
-                          pInputText
-                          required
-                          type="password"
-                          name="user_clave"
-                          [(ngModel)]="nuevaClave"
-                        />
-                        <label for="float-nombre">Contraseña</label>
+                        <label for="float-nombre">Dirección</label>
                     </span>
                 </div>
 

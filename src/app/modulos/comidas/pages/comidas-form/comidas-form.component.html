@@ -8,12 +8,12 @@
         >
             <button pButton icon="pi pi-trash" 
                 class="p-button-danger buttonEliminar"
-                *ngIf="esEdicion && usuario.activo"
-                (click)="abrirModalEliminarUsuario()"
+                *ngIf="esEdicion && comida.activo"
+                (click)="abrirModalEliminarComida()"
             >
             </button>
             <button pButton icon="pi pi-save" 
-                *ngIf="esEdicion && usuario.activo || !esEdicion"
+                *ngIf="esEdicion && comida.activo || !esEdicion"
                 label="Guardar" 
                 (click)="guardar()"
                 class="p-button-success btnSave"
@@ -23,79 +23,63 @@
         </div>
 
         <div class="container_white">
-            <div class="row">
+            <div class="row" style="width: 100%;">
                 <div class="col-12">
                     <h1>Datos Generales:</h1>
                 </div>
-                <div class="col-6">
+                <div class="col-4">
                     <span class="p-float-label" style="width: 100%; margin: 1em">
                         <input
                           id="float-nombre"
                           class="full-wd greyInput"
                           pInputText
                           required
-                          [(ngModel)]="usuario.nombre"
-                          name="user_nombre"
+                          [(ngModel)]="comida.nombre"
+                          name="comida_nombre"
                         />
                         <label for="float-nombre">Nombre</label>
                     </span>
                 </div>
 
-                <div class="col-6">
+                <div class="col-4">
                     <span class="p-float-label" style="width: 100%; margin: 1em">
                         <input
-                          id="float-correo"
+                          id="float-codigo"
                           class="full-wd greyInput"
                           pInputText
                           required
-                          name="user_correo"
-                          [(ngModel)]="usuario.correo"
+                          name="comida_codigo"
+                          [(ngModel)]="comida.codigo"
                         />
-                        <label for="float-nombre">Correo</label>
+                        <label for="float-nombre">Código</label>
                     </span>
                 </div>
 
-                <div class="col-6">
+                <div class="col-4">
                     <span class="p-float-label" style="width: 100%; margin: 1em">
                         <input
-                          id="float-telefono"
+                          id="float-precio"
                           class="full-wd greyInput"
                           pInputText
                           type="number"
                           required
-                          name="user_telefono"
-                          [(ngModel)]="usuario.telefono"
+                          name="comida_precio"
+                          [(ngModel)]="comida.precio"
                         />
-                        <label for="float-nombre">Teléfono</label>
+                        <label for="float-nombre">Précio</label>
                     </span>
                 </div>
 
-                <div class="col-6">
+                <div class="col-12">
                     <span class="p-float-label" style="width: 100%; margin: 1em">
-                        <input
-                          id="float-usuario"
-                          class="full-wd greyInput"
-                          pInputText
-                          required
-                          name="user_usuario"
-                          [(ngModel)]="usuario.cuenta_usuario"
-                        />
-                        <label for="float-nombre">Usuario</label>
-                    </span>
-                </div>
+                        <textarea id="descripcion" name="descripcion" 
+                            class="form-control full-width-textarea" rows="4" style="width: 97%;" 
+                            pInputTextarea [autoResize]="true" 
+                            [(ngModel)]="comida.descripcion"
+                        >
+                        </textarea>
 
-                <div class="col-6">
-                    <span class="p-float-label" style="width: 100%; margin: 1em">
-                        <input
-                          id="float-clave"
-                          class="full-wd greyInput"
-                          pInputText
-                          required
-                          type="password"
-                          name="user_clave"
-                          [(ngModel)]="nuevaClave"
-                        />
-                        <label for="float-nombre">Contraseña</label>
+                        <label for="float-nombre">Descripción</label>
                     </span>
                 </div>
 

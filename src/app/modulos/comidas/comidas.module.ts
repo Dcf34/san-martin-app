@@ -9,19 +9,19 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { MessageService } from 'primeng/api';
 import { MensajesService } from 'src/app/core/services/mensajes.service';
 import { DatePipe } from '@angular/common';
+import { NavbarModule } from '../../shared/components/navbar/navbar.module';
 import { TableModule } from 'primeng/table';
-import { EdicionUsuariosComponent } from './usuarios-form.component';
-import { NavbarModule } from 'src/app/shared/components/navbar/navbar.module';
-import { InputTextModule } from 'primeng/inputtext';
 import { MessagesModule } from 'primeng/messages';
-import { DeleteUsuarioComponent } from '../../modals/delete-usuario.component';
+import { ComidasRoutingModule } from './comidas-routing.module';
+import { ComidasComponent } from './pages/comidas.component';
+import { ComidasFormModule } from './pages/comidas-form/comidas-form.module';
 
 @NgModule({
   declarations: [
-    EdicionUsuariosComponent,
-    DeleteUsuarioComponent
+    ComidasComponent
   ],
   imports: [
+    ComidasRoutingModule,
     CommonModule,
     ProgressBarModule,
     CheckboxModule,
@@ -30,10 +30,10 @@ import { DeleteUsuarioComponent } from '../../modals/delete-usuario.component';
     FormsModule,
     NavbarModule,
     TableModule,
-    InputTextModule,
-    MessagesModule, ProgressBarModule
+    MessagesModule,
+    ComidasFormModule
   ],
   providers: [DialogService,
     MessageService, MensajesService, DatePipe]
 })
-export class UsuariosFormModule { }
+export class ComidasModule { }

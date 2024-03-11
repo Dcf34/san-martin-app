@@ -7,6 +7,7 @@ import { ButtonModule } from 'primeng/button';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { ToastModule } from 'primeng/toast';
 import { MessagesModule } from 'primeng/messages';
+import { ProgressBarModule } from 'primeng/progressbar';
 
 @NgModule({
   declarations: [NavbarComponent],
@@ -17,6 +18,9 @@ import { MessagesModule } from 'primeng/messages';
     ButtonModule,
     ToastModule,
     MessagesModule,
-    BreadcrumbModule]
+    BreadcrumbModule,
+    ProgressBarModule,
+    SidebarModule
+  ]
 })
 export class NavbarModule { }

@@ -10,16 +10,17 @@ import { MessageService } from 'primeng/api';
 import { MensajesService } from 'src/app/core/services/mensajes.service';
 import { DatePipe } from '@angular/common';
 import { TableModule } from 'primeng/table';
-import { EdicionUsuariosComponent } from './usuarios-form.component';
 import { NavbarModule } from 'src/app/shared/components/navbar/navbar.module';
 import { InputTextModule } from 'primeng/inputtext';
 import { MessagesModule } from 'primeng/messages';
-import { DeleteUsuarioComponent } from '../../modals/delete-usuario.component';
+import { EdicionComidasComponent } from './comidas-form.component';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { DeleteComidaComponent } from '../../modals/delete-comida/delete-comida.component';
 
 @NgModule({
   declarations: [
-    EdicionUsuariosComponent,
-    DeleteUsuarioComponent
+    EdicionComidasComponent,
+    DeleteComidaComponent
   ],
   imports: [
     CommonModule,
@@ -31,9 +32,10 @@ import { DeleteUsuarioComponent } from '../../modals/delete-usuario.component';
     NavbarModule,
     TableModule,
     InputTextModule,
-    MessagesModule, ProgressBarModule
+    MessagesModule, ProgressBarModule,
+    InputTextareaModule
   ],
   providers: [DialogService,
     MessageService, MensajesService, DatePipe]
 })
-export class UsuariosFormModule { }
+export class ComidasFormModule { }

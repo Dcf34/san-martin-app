@@ -1,32 +1,38 @@
-import { rutasAplicativo } from './../../core/config/routes.config';
+import { rutasAplicativo } from './../../../core/config/routes.config';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, interval } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MensajesService } from 'src/app/core/services/mensajes.service';
-import { AuthService } from '../login/services/auth.service';
+import { AuthService } from '../../login/services/auth.service'
 import { NavbarService } from 'src/app/shared/services/navbar.items.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { Comida, FiltroComida } from '../models/comidas.models';
+import { ComidasService } from '../services/comidas.service';
 
 @UntilDestroy()
 @Component({
-  selector: 'app-inicio',
-  templateUrl: './inicio.component.html',
-  styleUrls: ['./inicio.component.scss']
+  selector: 'app-comidas',
+  templateUrl: './comidas.component.html',
+  styleUrls: ['./comidas.component.scss']
 })
-export class InicioComponent implements OnInit {
+export class ComidasComponent implements OnInit {
   
   cargando = false;
   unsubscribe$: Subject<boolean> = new Subject<boolean>();
 
   redirectUrl = '';
 
+  comidas: Comida[] = [];
+
   constructor(
     private authService:AuthService,
     private router:Router,
     private activadedRoute:ActivatedRoute,
     private mensajesService:MensajesService,
-    private NavbarService: NavbarService)
+    private NavbarService: NavbarService,
+    private comidasService: ComidasService
+   )
     { 
       this.activadedRoute.queryParamMap.subscribe((params) => {
       const redirectUrl = params.get('redirectUrl');
@@ -40,8 +46,13 @@ export class InicioComponent implements OnInit {
 
   datosMenu = {
     itemsBreadCrumb: [
-      
+      { 
+        icon: 'pi pi-fw pi-apple', 
+        label: 'Comidas', 
+        routerLink: '/inicio/comidas'
+      }
     ],
+
     home: { label: 'Inicio', icon: 'pi pi-home', routerLink: '/' }
   };
 
@@ -60,7 +71,24 @@ export class InicioComponent implements OnInit {
         
     });
 
+    this.getComidas(this.filtroComida);
+
     this.enviarDatos();
+
+    this.imprimirMensaje();
+
+  }
+
+  async imprimirMensaje(){
+
+    setTimeout(() => {
+      const mensaje = sessionStorage.getItem('mensajePostNavegacion');
+      if (mensaje) {
+          this.mensajesService.exitoso('Exitoso', mensaje);
+      }
+
+      sessionStorage.removeItem('mensajePostNavegacion');
+    }, 0);
 
   }
 
@@ -82,22 +110,46 @@ export class InicioComponent implements OnInit {
     this.router.navigateByUrl(navigateUrl);
   }
 
-  abrirModulo(modulo:string)
-  {
-    let ruta = '';
-    
-    if(modulo == 'usuarios') {
-      ruta = rutasAplicativo.usuarios.inicio;
-    }
-    else if(modulo == 'clientes') {
-      ruta = rutasAplicativo.clientes.inicio;
-    }
-    else if(modulo == 'comidas') {
-      ruta = rutasAplicativo.comidas.inicio;
-    }
+  filtroComida: FiltroComida = {
+    activo: true
+  };
 
-    this.router.navigateByUrl(ruta);
+  redirigirDetalleId(id_comida?: number){
+        
+    let url = '';
+
+    if (id_comida) {
+        url = rutasAplicativo.comidas.edicion + `/${id_comida}`;
+    }
+    
+    this.router.navigateByUrl(url);
   }
+
+  redirigirAlta(){
+        
+    let url = '';
+
+    url = rutasAplicativo.comidas.alta;
+    
+    this.router.navigateByUrl(url);
+  }
+
+  getComidas(filtro: FiltroComida) {
+    this.cargando = true;
+
+    this.comidasService
+      .getComidas(filtro)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe({
+        next: (data) => {
+            if(data.length > 0){
+                this.comidas = data;
+                this.cargando = false;
+            }
+        },
+        error: () => this.cargando = false
+    });
+}
   
 }
 

@@ -8,20 +8,20 @@ import { MensajesService } from 'src/app/core/services/mensajes.service';
 import { SesionJWT } from 'src/app/shared/models/jwt.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { rutasAplicativo } from 'src/app/core/config';
-import { FiltroUsuario, UsuarioActualizacionDto, UsuarioCreacionDto, UsuarioDto } from '../../models/usuario.models';
 import { AuthService } from 'src/app/modulos/login/services/auth.service';
 import { NavbarService } from 'src/app/shared/services/navbar.items.service';
-import { UsuariosService } from '../../services/usuarios.service';
 import { idUserCreacionToObject, idUserModificacionToObject, userIdToObject } from 'src/app/shared/models/functions/user-modification.function';
-import { DeleteUsuarioComponent } from '../../modals/delete-usuario.component';
+import { Cliente, FiltroCliente } from '../../models/clientes.models';
+import { ClientesService } from '../../services/clientes.service';
+import { DeleteClienteComponent } from '../../modals/delete-cliente.component';
 
 @UntilDestroy()
 @Component({
-    selector: 'app-usuarios-form',
-    templateUrl: './usuarios-form.component.html',
-    styleUrls: ['./usuarios-form.component.scss']
+    selector: 'app-clientes-form',
+    templateUrl: './clientes-form.component.html',
+    styleUrls: ['./clientes-form.component.scss']
 })
-export class EdicionUsuariosComponent implements OnInit{
+export class EdicionClientesComponent implements OnInit{
     rutaActual = rutasAplicativo.usuarios.edicion;
     cargando: boolean = false;
     modal: DynamicDialogRef | undefined;
@@ -31,8 +31,8 @@ export class EdicionUsuariosComponent implements OnInit{
     unsubscribe$: Subject<boolean> = new Subject<boolean>();
 
     idUsuario = this.route.snapshot.paramMap.get('id');
-    filtroUsuario: FiltroUsuario = {};
-    usuario: UsuarioDto = { activo: true };
+    filtroCliente: FiltroCliente = {};
+    cliente: Cliente = { activo: true };
 
     esEdicion: boolean = false;
     datosMenu = {};
@@ -41,14 +41,14 @@ export class EdicionUsuariosComponent implements OnInit{
     {
         itemsBreadCrumb: [
             {
-            icon: 'pi pi-fw pi-user', 
-            label: 'Usuarios', 
-            routerLink: '/inicio/usuarios'
+            icon: 'pi pi-fw pi-users', 
+            label: 'Clientes', 
+            routerLink: '/inicio/clientes'
             },
             {
             icon: 'pi pi-fw pi-pencil', 
             label: 'Edición', 
-            routerLink: '/inicio/usuarios/edicion'
+            routerLink: '/inicio/clientes/edicion'
             }
         ],
         home: { label: 'Inicio', icon: 'pi pi-home', routerLink: '/' }
@@ -59,13 +59,13 @@ export class EdicionUsuariosComponent implements OnInit{
         itemsBreadCrumb: [
             {
                 icon: 'pi pi-fw pi-user', 
-                label: 'Usuarios', 
-                routerLink: '/inicio/usuarios'
+                label: 'Clientes', 
+                routerLink: '/inicio/clientes'
             },
             {
                 icon: 'pi pi-fw pi-plus', 
                 label: 'Alta', 
-                routerLink: '/inicio/usuarios/alta'
+                routerLink: '/inicio/clientes/alta'
             }
         ],
         home: { label: 'Inicio', icon: 'pi pi-home', routerLink: '/' }
@@ -80,7 +80,7 @@ export class EdicionUsuariosComponent implements OnInit{
         private mensajesService: MensajesService,
         private NavbarService: NavbarService,
         private route: ActivatedRoute, 
-        private usuariosService: UsuariosService
+        private clientesService: ClientesService
     ) {};
 
     async ngOnInit(): Promise<void> {
@@ -108,10 +108,10 @@ export class EdicionUsuariosComponent implements OnInit{
             let id = this.route.snapshot.paramMap.get('id');
 
             if(id){
-                const idUsuario = parseInt(id);
-                this.filtroUsuario.id_usuario = idUsuario;
+                const idCliente = parseInt(id);
+                this.filtroCliente.id_cliente = idCliente;
 
-                this.getUsuarios(this.filtroUsuario);
+                this.getClientes(this.filtroCliente);
             }
 
         } else if (url.includes('alta')) {
@@ -139,16 +139,16 @@ export class EdicionUsuariosComponent implements OnInit{
     
       }
 
-    getUsuarios(filtro: FiltroUsuario) {
+      getClientes(filtro: FiltroCliente) {
         this.cargando = true;
     
-        this.usuariosService
-          .getUsuarios(filtro)
+        this.clientesService
+          .getClientes(filtro)
           .pipe(takeUntil(this.unsubscribe$))
           .subscribe({
             next: (data) => {
                 if(data.length > 0){
-                    this.usuario = data[0];
+                    this.cliente = data[0];
                     this.cargando = false;
                 }
             },
@@ -168,32 +168,32 @@ export class EdicionUsuariosComponent implements OnInit{
         if(this.esEdicion){
             this.guardarCambios();
         }else{
-            this.crearUsuarioForm();
+            this.crearClienteForm();
         }
     }
 
     nuevaClave?: string;
 
     async guardarCambios(){
-        const usuarioModificacion: UsuarioActualizacionDto = {
-            id_usuario: this.usuario.id_usuario,
-            activo: this.usuario.activo,
+        const clienteModificacion: Cliente = {
+            id_cliente: this.cliente.id_cliente,
+            activo: this.cliente.activo,
             fecha_modificacion: new Date,
-            nombre: this.usuario.nombre,
-            correo: this.usuario.correo,
-            telefono: this.usuario.telefono?.toString(),
-            cuenta_usuario: this.usuario.cuenta_usuario,
-            clave: btoa(this.nuevaClave ?? "")
+            nombre: this.cliente.nombre,
+            telefono: this.cliente.telefono?.toString(),
+            direccion: this.cliente.direccion
         };
 
-        await this.actualizarUsuario(usuarioModificacion);
+        idUserModificacionToObject(clienteModificacion)
+
+        await this.setCliente(clienteModificacion);
     }
 
-    async actualizarUsuario(usuarioModificacion: UsuarioActualizacionDto){
+    async setCliente(cliente: Cliente){
         this.cargando = true;
 
-        this.usuariosService
-        .updateUsuario(usuarioModificacion)
+        this.clientesService
+        .setCliente(cliente)
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe({
             next: (ejecucion) => {
@@ -205,7 +205,7 @@ export class EdicionUsuariosComponent implements OnInit{
                         location.reload();
                     }
                     else{
-                        this.navegarUsuarios();
+                        this.navegarClientes();
                     }
                 }
 
@@ -217,48 +217,18 @@ export class EdicionUsuariosComponent implements OnInit{
         });
     }
 
-    async crearUsuarioForm(){
-        const usuarioCreacion: UsuarioCreacionDto = {
+    async crearClienteForm(){
+        const clienteCreacion: Cliente = {
             activo: true,
-            nombre: this.usuario.nombre,
-            correo: this.usuario.correo,
-            telefono: this.usuario.telefono?.toString(),
-            cuenta_usuario: this.usuario.cuenta_usuario,
-            clave: this.nuevaClave
+            nombre: this.cliente.nombre,
+            telefono: this.cliente.telefono?.toString(),
+            direccion: this.cliente.direccion,
         };
         
-        console.log(usuarioCreacion);
+        console.log(clienteCreacion);
 
-        await this.crearUsuario(usuarioCreacion);
+        await this.setCliente(clienteCreacion);
 
-    }
-
-    async crearUsuario(usuarioCreacion: UsuarioCreacionDto){
-        this.cargando = true;
-
-        this.usuariosService
-        .crearUsuario(usuarioCreacion)
-        .pipe(takeUntil(this.unsubscribe$))
-        .subscribe({
-            next: (ejecucion) => {
-                if (ejecucion.exitoso) {
-                    // Guardar mensaje en sessionStorage o localStorage
-                    sessionStorage.setItem('mensajePostNavegacion', ejecucion.mensaje);
-
-                    if(this.esEdicion){
-                        location.reload();
-                    }
-                    else{
-                        this.navegarUsuarios();
-                    }
-                }
-
-                this.cargando = false; // Ocultar indicador de carga después de finalizar
-            },
-            error: (error) => {
-            this.cargando = false; // Ocultar indicador de carga en caso de error
-            }
-        });
     }
 
     // Función para formatear la fecha
@@ -284,17 +254,15 @@ export class EdicionUsuariosComponent implements OnInit{
         this.authService.limpiarSesion();
     }
     
-    navegarUsuarios(){
-        const navigateUrl = rutasAplicativo.usuarios.inicio;
+    navegarClientes(){
+        const navigateUrl = rutasAplicativo.clientes.inicio;
         this.router.navigateByUrl(navigateUrl);
     }
 
     desactivarBtnGuardar(){
-        if((this.usuario.nombre == undefined || this.usuario.nombre == '' || this.usuario.nombre == null) ||
-           (this.usuario.correo == undefined || this.usuario.correo == '' || this.usuario.correo == null) ||
-           (this.usuario.telefono == undefined || this.usuario.telefono == '' || this.usuario.telefono == null) ||
-           (this.usuario.cuenta_usuario == undefined || this.usuario.cuenta_usuario == '' || this.usuario.cuenta_usuario == null) ||
-           (this.nuevaClave == undefined || this.nuevaClave == '' || this.nuevaClave == null)
+        if((this.cliente.nombre == undefined || this.cliente.nombre == '' || this.cliente.nombre == null) ||
+           (this.cliente.telefono == undefined || this.cliente.telefono == '' || this.cliente.telefono == null) ||
+           (this.cliente.direccion == undefined || this.cliente.direccion == '' || this.cliente.direccion == null)
         ){
             return true;
         }
@@ -302,19 +270,19 @@ export class EdicionUsuariosComponent implements OnInit{
         return false;
     }
 
-    abrirModalEliminarUsuario(){
-        const ref = this.dialogService.open(DeleteUsuarioComponent, {
-          header: 'Eliminar Usuario',
+    abrirModalEliminarCliente(){
+        const ref = this.dialogService.open(DeleteClienteComponent, {
+          header: 'Eliminar Cliente',
           width: '40%',
           data: {
-            usuario: this.usuario
+            cliente: this.cliente
           }
         });
     
         ref.onClose.subscribe((value: boolean) => {
           // Aquí puedes manejar la descripción que se recibe al cerrar el diálogo
           if(value == true){
-            this.navegarUsuarios();
+            this.navegarClientes();
           }
           
         });

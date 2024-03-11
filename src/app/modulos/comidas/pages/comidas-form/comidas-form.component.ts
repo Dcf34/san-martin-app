@@ -8,21 +8,21 @@ import { MensajesService } from 'src/app/core/services/mensajes.service';
 import { SesionJWT } from 'src/app/shared/models/jwt.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { rutasAplicativo } from 'src/app/core/config';
-import { FiltroUsuario, UsuarioActualizacionDto, UsuarioCreacionDto, UsuarioDto } from '../../models/usuario.models';
 import { AuthService } from 'src/app/modulos/login/services/auth.service';
 import { NavbarService } from 'src/app/shared/services/navbar.items.service';
-import { UsuariosService } from '../../services/usuarios.service';
 import { idUserCreacionToObject, idUserModificacionToObject, userIdToObject } from 'src/app/shared/models/functions/user-modification.function';
-import { DeleteUsuarioComponent } from '../../modals/delete-usuario.component';
+import { Comida, FiltroComida } from '../../models/comidas.models';
+import { ComidasService } from '../../services/comidas.service';
+import { DeleteComidaComponent } from '../../modals/delete-comida/delete-comida.component';
 
 @UntilDestroy()
 @Component({
-    selector: 'app-usuarios-form',
-    templateUrl: './usuarios-form.component.html',
-    styleUrls: ['./usuarios-form.component.scss']
+    selector: 'app-comidas-form',
+    templateUrl: './comidas-form.component.html',
+    styleUrls: ['./comidas-form.component.scss']
 })
-export class EdicionUsuariosComponent implements OnInit{
-    rutaActual = rutasAplicativo.usuarios.edicion;
+export class EdicionComidasComponent implements OnInit{
+    rutaActual = rutasAplicativo.comidas.edicion;
     cargando: boolean = false;
     modal: DynamicDialogRef | undefined;
 
@@ -30,9 +30,9 @@ export class EdicionUsuariosComponent implements OnInit{
     sesion:SesionJWT = {};
     unsubscribe$: Subject<boolean> = new Subject<boolean>();
 
-    idUsuario = this.route.snapshot.paramMap.get('id');
-    filtroUsuario: FiltroUsuario = {};
-    usuario: UsuarioDto = { activo: true };
+    idComida = this.route.snapshot.paramMap.get('id');
+    filtroComida: FiltroComida = {};
+    comida: Comida = { activo: true };
 
     esEdicion: boolean = false;
     datosMenu = {};
@@ -41,14 +41,14 @@ export class EdicionUsuariosComponent implements OnInit{
     {
         itemsBreadCrumb: [
             {
-            icon: 'pi pi-fw pi-user', 
-            label: 'Usuarios', 
-            routerLink: '/inicio/usuarios'
+            icon: 'pi pi-fw pi-apple', 
+            label: 'Comidas', 
+            routerLink: '/inicio/comidas'
             },
             {
             icon: 'pi pi-fw pi-pencil', 
             label: 'Edición', 
-            routerLink: '/inicio/usuarios/edicion'
+            routerLink: '/inicio/comidas/edicion'
             }
         ],
         home: { label: 'Inicio', icon: 'pi pi-home', routerLink: '/' }
@@ -58,14 +58,14 @@ export class EdicionUsuariosComponent implements OnInit{
     {
         itemsBreadCrumb: [
             {
-                icon: 'pi pi-fw pi-user', 
-                label: 'Usuarios', 
-                routerLink: '/inicio/usuarios'
+                icon: 'pi pi-fw pi-apple', 
+                label: 'Comidas', 
+                routerLink: '/inicio/comidas'
             },
             {
                 icon: 'pi pi-fw pi-plus', 
                 label: 'Alta', 
-                routerLink: '/inicio/usuarios/alta'
+                routerLink: '/inicio/comidas/alta'
             }
         ],
         home: { label: 'Inicio', icon: 'pi pi-home', routerLink: '/' }
@@ -80,7 +80,7 @@ export class EdicionUsuariosComponent implements OnInit{
         private mensajesService: MensajesService,
         private NavbarService: NavbarService,
         private route: ActivatedRoute, 
-        private usuariosService: UsuariosService
+        private comidasService: ComidasService
     ) {};
 
     async ngOnInit(): Promise<void> {
@@ -108,10 +108,10 @@ export class EdicionUsuariosComponent implements OnInit{
             let id = this.route.snapshot.paramMap.get('id');
 
             if(id){
-                const idUsuario = parseInt(id);
-                this.filtroUsuario.id_usuario = idUsuario;
+                const idComida = parseInt(id);
+                this.filtroComida.id_comida = idComida;
 
-                this.getUsuarios(this.filtroUsuario);
+                this.getComidas(this.filtroComida);
             }
 
         } else if (url.includes('alta')) {
@@ -139,16 +139,16 @@ export class EdicionUsuariosComponent implements OnInit{
     
       }
 
-    getUsuarios(filtro: FiltroUsuario) {
+      getComidas(filtro: FiltroComida) {
         this.cargando = true;
     
-        this.usuariosService
-          .getUsuarios(filtro)
+        this.comidasService
+          .getComidas(filtro)
           .pipe(takeUntil(this.unsubscribe$))
           .subscribe({
             next: (data) => {
                 if(data.length > 0){
-                    this.usuario = data[0];
+                    this.comida = data[0];
                     this.cargando = false;
                 }
             },
@@ -168,32 +168,31 @@ export class EdicionUsuariosComponent implements OnInit{
         if(this.esEdicion){
             this.guardarCambios();
         }else{
-            this.crearUsuarioForm();
+            this.crearComidaForm();
         }
     }
 
-    nuevaClave?: string;
-
     async guardarCambios(){
-        const usuarioModificacion: UsuarioActualizacionDto = {
-            id_usuario: this.usuario.id_usuario,
-            activo: this.usuario.activo,
+        const comidaModificacion: Comida = {
+            id_comida: this.comida.id_comida,
+            activo: this.comida.activo,
             fecha_modificacion: new Date,
-            nombre: this.usuario.nombre,
-            correo: this.usuario.correo,
-            telefono: this.usuario.telefono?.toString(),
-            cuenta_usuario: this.usuario.cuenta_usuario,
-            clave: btoa(this.nuevaClave ?? "")
+            nombre: this.comida.nombre,
+            precio: this.comida.precio,
+            codigo: this.comida.codigo,
+            descripcion: this.comida.descripcion
         };
 
-        await this.actualizarUsuario(usuarioModificacion);
+        idUserModificacionToObject(comidaModificacion)
+
+        await this.setComida(comidaModificacion);
     }
 
-    async actualizarUsuario(usuarioModificacion: UsuarioActualizacionDto){
+    async setComida(comida: Comida){
         this.cargando = true;
 
-        this.usuariosService
-        .updateUsuario(usuarioModificacion)
+        this.comidasService
+        .setComida(comida)
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe({
             next: (ejecucion) => {
@@ -205,7 +204,7 @@ export class EdicionUsuariosComponent implements OnInit{
                         location.reload();
                     }
                     else{
-                        this.navegarUsuarios();
+                        this.navegarComidas();
                     }
                 }
 
@@ -217,48 +216,17 @@ export class EdicionUsuariosComponent implements OnInit{
         });
     }
 
-    async crearUsuarioForm(){
-        const usuarioCreacion: UsuarioCreacionDto = {
+    async crearComidaForm(){
+        const comidaCreacion: Comida = {
             activo: true,
-            nombre: this.usuario.nombre,
-            correo: this.usuario.correo,
-            telefono: this.usuario.telefono?.toString(),
-            cuenta_usuario: this.usuario.cuenta_usuario,
-            clave: this.nuevaClave
+            nombre: this.comida.nombre,
+            codigo: this.comida.codigo,
+            precio: this.comida.precio,
+            descripcion: this.comida.descripcion
         };
         
-        console.log(usuarioCreacion);
+        await this.setComida(comidaCreacion);
 
-        await this.crearUsuario(usuarioCreacion);
-
-    }
-
-    async crearUsuario(usuarioCreacion: UsuarioCreacionDto){
-        this.cargando = true;
-
-        this.usuariosService
-        .crearUsuario(usuarioCreacion)
-        .pipe(takeUntil(this.unsubscribe$))
-        .subscribe({
-            next: (ejecucion) => {
-                if (ejecucion.exitoso) {
-                    // Guardar mensaje en sessionStorage o localStorage
-                    sessionStorage.setItem('mensajePostNavegacion', ejecucion.mensaje);
-
-                    if(this.esEdicion){
-                        location.reload();
-                    }
-                    else{
-                        this.navegarUsuarios();
-                    }
-                }
-
-                this.cargando = false; // Ocultar indicador de carga después de finalizar
-            },
-            error: (error) => {
-            this.cargando = false; // Ocultar indicador de carga en caso de error
-            }
-        });
     }
 
     // Función para formatear la fecha
@@ -284,17 +252,15 @@ export class EdicionUsuariosComponent implements OnInit{
         this.authService.limpiarSesion();
     }
     
-    navegarUsuarios(){
-        const navigateUrl = rutasAplicativo.usuarios.inicio;
+    navegarComidas(){
+        const navigateUrl = rutasAplicativo.comidas.inicio;
         this.router.navigateByUrl(navigateUrl);
     }
 
     desactivarBtnGuardar(){
-        if((this.usuario.nombre == undefined || this.usuario.nombre == '' || this.usuario.nombre == null) ||
-           (this.usuario.correo == undefined || this.usuario.correo == '' || this.usuario.correo == null) ||
-           (this.usuario.telefono == undefined || this.usuario.telefono == '' || this.usuario.telefono == null) ||
-           (this.usuario.cuenta_usuario == undefined || this.usuario.cuenta_usuario == '' || this.usuario.cuenta_usuario == null) ||
-           (this.nuevaClave == undefined || this.nuevaClave == '' || this.nuevaClave == null)
+        if((this.comida.nombre == undefined || this.comida.nombre == '' || this.comida.nombre == null) ||
+           (this.comida.codigo == undefined || this.comida.codigo == '' || this.comida.codigo == null) ||
+           (this.comida.precio == undefined || this.comida.precio == 0 || this.comida.precio == null)
         ){
             return true;
         }
@@ -302,23 +268,23 @@ export class EdicionUsuariosComponent implements OnInit{
         return false;
     }
 
-    abrirModalEliminarUsuario(){
-        const ref = this.dialogService.open(DeleteUsuarioComponent, {
-          header: 'Eliminar Usuario',
+    abrirModalEliminarComida(){
+        const ref = this.dialogService.open(DeleteComidaComponent, {
+          header: 'Eliminar Comida',
           width: '40%',
           data: {
-            usuario: this.usuario
+            comida: this.comida
           }
         });
     
         ref.onClose.subscribe((value: boolean) => {
           // Aquí puedes manejar la descripción que se recibe al cerrar el diálogo
           if(value == true){
-            this.navegarUsuarios();
+            this.navegarComidas();
           }
           
         });
-      }
+    }
 
     
 }

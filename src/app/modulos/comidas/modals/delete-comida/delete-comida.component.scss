@@ -1,0 +1,115 @@
+//Datos encabezasdo tabla
+::ng-deep .p-datatable .p-datatable-thead > tr > th[class="red_header"]{
+    background-color: black;
+    padding: 5px;
+    text-align: center;
+    font-size: 14px;
+    color: white;
+  }
+  
+  ::ng-deep .table_section{
+    margin-top: 20px;
+  }
+  
+  //Datos filas tablas
+  ::ng-deep .p-element.tableEmpleados .p-datatable .p-datatable-tbody > tr > td {
+    padding: 10px;
+    font-size: 14px;
+    color:black;
+    text-align: center;
+  }
+  
+  .left-aligned {
+    text-align: left;
+  }
+  
+  .right-aligned {
+    text-align: right;
+  }
+  
+  
+  ::ng-deep .p-dialog .p-dialog-header i[class="pi pi-search"]{
+    margin-right: 20px;
+  }
+  
+  ::ng-deep .p-dialog-header-icon.p-dialog-header-maximize {
+    color: white;
+  }
+  
+  ::ng-deep .p-dialog .p-dialog-header{
+    background-color: black;
+    padding: 10px 15px;
+    color: white;
+  }
+  
+  ::ng-deep .p-dialog .p-dialog-content{
+    padding: 20px 30px;
+  }
+  
+  .container-filtros {
+    width: 100%;
+  }
+  
+  .btnConsultar{
+    width: 100%;
+  }
+  
+  .btnSelect{
+    width: 15px;
+    height: 15px;
+  }
+  
+  .btnSelect {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  
+  .inputsContainer {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .flex-left,
+  .flex-right {
+    display: inline-block;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    flex-basis: 50%; /* Ajusta el ancho según sea necesario */
+  }
+  
+  /* Media query para dispositivos más pequeños */
+  @media screen and (max-width: 768px) {
+    .flex-left,
+    .flex-right {
+        flex-basis: 100%;
+    }
+  }
+  
+  .tableDiv{
+  margin-top: 40px;
+  }
+  
+  .full-wd{
+  width: 100%;
+  }
+  
+  .p-col-6 {
+  /* Establece un ancho específico o porcentaje para cada columna */
+  width: 80%; /* Esto hará que cada columna ocupe el 50% del ancho del contenedor */
+  
+  /* Agrega márgenes o padding según sea necesario */
+  padding: 10px;
+  }
+  
+  /* Media query para dispositivos más pequeños */
+  @media screen and (max-width: 768px) {
+  .p-col-6 {
+      width: 100%; /* Cambia el ancho a 100% para que las columnas ocupen toda la fila en dispositivos más pequeños */
+  }
+  }
+
+  ::ng-deep .custom-header-content i{
+    margin-right: 10px;
+}

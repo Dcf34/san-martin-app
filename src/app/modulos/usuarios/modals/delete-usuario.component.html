@@ -1,0 +1,20 @@
+<div class="text-content">
+    <h3>¿Estás seguro de eliminar este usuario?</h3>
+</div>
+
+<div class="buttons-container">
+    <div class="row">
+        <div class="col-6"></div>
+        <div class="col-6">
+            <div class="row">
+                <div class="col-6">
+                    <button pButton class="p-button-danger" (click)="cerrar(false)">Cancelar</button>
+                </div>
+
+                <div class="col-6">
+                    <button pButton class="p-button-success" (click)="eliminarUsuario(true)" [disabled]="cargando">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -5,9 +5,9 @@
         <hr>
         <ul>
             <li (click)="abrirModulo('usuarios')" class="container-item title_navbar"><i class="fas fa-user"></i><a> Usuarios</a></li>
-            <li class="container-item title_navbar"><i class="fas fa-users"></i><a> Clientes</a></li>
-            <li class="container-item title_navbar"><i class="pi pi-apple"></i><a> Comidas</a></li>
-            <li class="container-item title_navbar"><i class="fas fa-cogs"></i><a> Configuración</a></li>
+            <li (click)="abrirModulo('clientes')" class="container-item title_navbar"><i class="fas fa-users"></i><a> Clientes</a></li>
+            <li (click)="abrirModulo('comidas')" class="container-item title_navbar"><i class="pi pi-apple"></i><a> Comidas</a></li>
+            <li (click)="abrirModulo('configuracion')" class="container-item title_navbar"><i class="fas fa-cogs"></i><a> Configuración</a></li>
             <li class="container-item title_navbar"><i class="fas fa-cash-register"></i><a> Nueva Venta</a></li>
             <li class="container-item title_navbar"><i class="fas fa-cart-plus"></i><a> Historial Ventas</a></li>
 
@@ -18,14 +18,15 @@
         <div class="menu-bar">
             <h2 (click)="navegarPortal()" class="title_navbar">INICIO</h2>
             <!-- <button class="user-button"><i class="fas fa-user"></i></button> -->
-            <div class="dropdown">
+            <div class="dropdown" *ngIf="mostrarBtnUser">
                 <button class="user-button" (click)="mostrarBtnClose()"><i class="fas fa-user"></i></button>
                 <div class="dropdown-content" *ngIf="mostrarDropdown">
                     <div class="option">
-                        <span>Cerrar Sesión</span>
+                        <span (click)="cerrarSesion()">Cerrar Sesión</span>
                     </div>
                 </div>
             </div>
+            <button (click)="visibleSidebar=true" pButton class="btnMenu" icon="pi pi-bars" *ngIf="mostrarBtnMenu"></button>
 
         </div>
 
@@ -34,7 +35,7 @@
             <p-breadcrumb class="max-w-full breadcrumb-style" [model]="itemsBreadCrumb" [home]="home"></p-breadcrumb>
 
             <ng-content select=".page-content">
-
+                
             </ng-content>
 
         </div>
@@ -46,3 +47,20 @@
         </footer>
     </div>
 </div>
+
+<p-sidebar [(visible)]="visibleSidebar" [baseZIndex]="10000" [modal]="true" position="right" styleClass="ui-sidebar-md">
+    <ng-template pTemplate="header">
+        <div class="container_header_sidebar">
+            <h3 (click)="navegarPortal()" class="title_navbar">Mariscos "San Martin"</h3>
+        </div>
+    </ng-template>
+    <ul>
+      <li (click)="abrirModulo('usuarios'); visibleSidebar=false" class="container-item title_navbar item_sidebar"><i class="fas fa-user"></i><a> Usuarios</a></li>
+      <li (click)="abrirModulo('clientes'); visibleSidebar=false" class="container-item title_navbar item_sidebar"><i class="fas fa-users"></i><a> Clientes</a></li>
+      <li (click)="abrirModulo('comidas'); visibleSidebar=false" class="container-item title_navbar item_sidebar"><i class="pi pi-apple"></i><a> Comidas</a></li>
+      <li (click)="abrirModulo('configuracion'); visibleSidebar=false" class="container-item title_navbar item_sidebar"><i class="fas fa-cogs"></i><a> Configuración</a></li>
+      <li (click)="visibleSidebar=false" class="container-item title_navbar item_sidebar"><i class="fas fa-cash-register"></i><a> Nueva Venta</a></li>
+      <li (click)="visibleSidebar=false" class="container-item title_navbar item_sidebar"><i class="fas fa-cart-plus"></i><a> Historial Ventas</a></li>
+      <li (click)="cerrarSesion(); visibleSidebar=false;" class="container-item title_navbar btnCloseSesion item_sidebar"><i class="fas fa-sign-out-alt"></i><a> Cerrar Sesión</a></li>
+    </ul>
+</p-sidebar>

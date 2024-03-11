@@ -12,7 +12,7 @@
         
         
         <p-table
-            [value]="usuarios"
+            [value]="comidas"
             [paginator]="true"
             [rows]="30"
             [showCurrentPageReport]="true"
@@ -30,14 +30,14 @@
                         Nombre
                     </th>
                     <th style="width:4%" class="column">
-                        Correo
+                        Código
                     </th>
                     <th style="width:4%" class="column">
-                        Teléfono
+                        Precio
                     </th>
                     <th style="width:4%" class="column">
-                        Usuario
-                    </th>
+                        Descripcion
+                    </th>               
                     <th style="width:4%" class="column">
                         Detalle
                     </th>
@@ -45,22 +45,16 @@
             </ng-template>
             <ng-template pTemplate="body" let-i>
                 <tr>
-                    <td class="rows">{{ i.id_usuario }}</td>
+                    <td class="rows">{{ i.id_comida }}</td>
                     <td class="rows">{{ i.nombre }}</td>
-                    <td class="rows">{{ i.correo }}</td>
-                    <td class="rows">{{ i.telefono }}</td>
-                    <td class="rows">{{ i.cuenta_usuario }}</td>
+                    <td class="rows">{{ i.codigo }}</td>
+                    <td class="rows">$ {{ i.precio }}</td>
+                    <td class="rows">{{ i.descripcion }}</td>
                     <td class="rows">
                         <div class="row">
-                            <div class="col-6">
-                                <button pButton class="p-button-warning"
-                                icon="fas fa-key" (click)="redirigirPermisosId(i.id_usuario)"
-                                >
-                                </button>
-                            </div>
-                            <div class="col-6">
+                            <div class="col-12">
                                 <button pButton class="p-button-success"
-                                icon="fas fa-edit" (click)="redirigirDetalleId(i.id_usuario)"
+                                icon="fas fa-edit" (click)="redirigirDetalleId(i.id_comida)"
                                 >
                                 </button>
                             </div>

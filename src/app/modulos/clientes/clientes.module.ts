@@ -9,19 +9,21 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { MessageService } from 'primeng/api';
 import { MensajesService } from 'src/app/core/services/mensajes.service';
 import { DatePipe } from '@angular/common';
+import { NavbarModule } from '../../shared/components/navbar/navbar.module';
 import { TableModule } from 'primeng/table';
-import { EdicionUsuariosComponent } from './usuarios-form.component';
-import { NavbarModule } from 'src/app/shared/components/navbar/navbar.module';
-import { InputTextModule } from 'primeng/inputtext';
 import { MessagesModule } from 'primeng/messages';
-import { DeleteUsuarioComponent } from '../../modals/delete-usuario.component';
+import { ClientesComponent } from './pages/clientes.component';
+import { ClientesRoutingModule } from './clientes-routing.module';
+import { ClientesFormModule } from './pages/clientes-form/clientes-form.module';
+import { DeleteClienteComponent } from './modals/delete-cliente.component';
 
 @NgModule({
   declarations: [
-    EdicionUsuariosComponent,
-    DeleteUsuarioComponent
+    ClientesComponent,
+    DeleteClienteComponent
   ],
   imports: [
+    ClientesRoutingModule,
     CommonModule,
     ProgressBarModule,
     CheckboxModule,
@@ -30,10 +32,10 @@ import { DeleteUsuarioComponent } from '../../modals/delete-usuario.component';
     FormsModule,
     NavbarModule,
     TableModule,
-    InputTextModule,
-    MessagesModule, ProgressBarModule
+    MessagesModule,
+    ClientesFormModule
   ],
   providers: [DialogService,
     MessageService, MensajesService, DatePipe]
 })
-export class UsuariosFormModule { }
+export class ClientesModule { }
