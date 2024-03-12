@@ -81,4 +81,30 @@ text-align: center;
     background-color: black;
     text-align: center;
     color: white;
-  }
+}
+
+.flecha-activa {
+  color: white; /* O el color que quieras para el estado activo */
+  font-size: 12px;
+}
+
+.flecha-inactiva {
+  color: gray; /* O el color que quieras para el estado inactivo */
+  font-size: 12px;
+}
+
+.btnArrow{
+  background-color: transparent;
+  margin-left: 5px;
+  border: none;
+  padding: 3px;
+  background: transparent;
+}
+
+.btnArrow:focus{
+  box-shadow:none;
+}
+
+.flecha{
+  margin-right: 3px;
+}

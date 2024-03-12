@@ -19,21 +19,39 @@
             [tableStyle]="{ 'min-width': '50rem', 'padding': '15px' }"
             currentPageReportTemplate="Mostrando {first} a {last}. {totalRecords} registros totales."
             [rowsPerPageOptions]="[5, 10, 25, 50]"
+            [sortField]="orderColumn"
+            [sortOrder]="orderType"
             class="tableListado"
         >
             <ng-template pTemplate="header" >
                 <tr>
                     <th style="width:4%" class="column">
                         #
+                        <button pButton (click)="orderTable('id_cliente')" class="btnArrow">
+                            <i class="fas fa-arrow-up flecha" [ngClass]="esOrderIdClienteAsc ? 'flecha-activa' : 'flecha-inactiva'"></i>
+                            <i class="fas fa-arrow-down" [ngClass]="esOrderIdClienteDesc ? 'flecha-activa' : 'flecha-inactiva'"></i>
+                        </button>
                     </th>
                     <th style="width:4%" class="column">
                         Nombre
+                        <button pButton (click)="orderTable('nombre')" class="btnArrow">
+                            <i class="fas fa-arrow-up flecha" [ngClass]="esOrderNombreAsc ? 'flecha-activa' : 'flecha-inactiva'"></i>
+                            <i class="fas fa-arrow-down" [ngClass]="esOrderNombreDesc ? 'flecha-activa' : 'flecha-inactiva'"></i>
+                        </button>
                     </th>
                     <th style="width:4%" class="column">
                         Teléfono
+                        <button pButton (click)="orderTable('telefono')" class="btnArrow">
+                            <i class="fas fa-arrow-up flecha" [ngClass]="esOrderTelefonoAsc ? 'flecha-activa' : 'flecha-inactiva'"></i>
+                            <i class="fas fa-arrow-down" [ngClass]="esOrderTelefonoDesc ? 'flecha-activa' : 'flecha-inactiva'"></i>
+                        </button>
                     </th>
                     <th style="width:4%" class="column">
                         Dirección
+                        <button pButton (click)="orderTable('direccion')" class="btnArrow">
+                            <i class="fas fa-arrow-up flecha" [ngClass]="esOrderDireccionAsc ? 'flecha-activa' : 'flecha-inactiva'"></i>
+                            <i class="fas fa-arrow-down" [ngClass]="esOrderDireccionDesc ? 'flecha-activa' : 'flecha-inactiva'"></i>
+                        </button>
                     </th>
                     <th style="width:4%" class="column">
                         Detalle

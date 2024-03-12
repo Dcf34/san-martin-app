@@ -149,7 +149,74 @@ export class ComidasComponent implements OnInit {
         },
         error: () => this.cargando = false
     });
-}
+  }
+
+  orderColumn: string = 'id_comida'; // Columna por la que se ordena inicialmente
+  orderType: number = 1; // -1 para descendente, 1 para ascendente
+
+  esOrderIdComidaAsc: boolean = false;
+  esOrderIdComidaDesc: boolean = false; // Comienza en orden descendente
+
+  esOrderNombreAsc: boolean = false;
+  esOrderNombreDesc: boolean = false;
+
+  esOrderCodigoAsc: boolean = false;
+  esOrderCodigoDesc: boolean = false;
+
+  esOrderPrecioAsc: boolean = false;
+  esOrderPrecioDesc: boolean = false;
+
+  esOrderDescripcionAsc: boolean = false;
+  esOrderDescripcionDesc: boolean = false;
+
+  orderTable(columna: string) {
+    // Reiniciar valores para todas las columnas excepto la seleccionada
+    this.resetOrderFlags(columna);
+
+    // Alternar entre ascendente y descendente para la columna seleccionada
+    if (this.orderColumn === columna) {
+      // Si la columna seleccionada ya era la columna de orden, invertimos el orden
+      this.orderType *= -1;
+    } else {
+      // Si seleccionamos una nueva columna, por defecto ordenamos ascendente
+      this.orderType = 1;
+    }
+
+    this.orderColumn = columna;
+    
+    // Actualizar las variables booleanas basadas en orderColumn y orderType
+    this.updateOrderFlags(columna);
+  }
+
+  resetOrderFlags(columna: string) {
+    this.esOrderIdComidaAsc = this.esOrderIdComidaDesc = this.esOrderNombreAsc = this.esOrderNombreDesc = this.esOrderCodigoAsc = this.esOrderCodigoDesc = this.esOrderPrecioAsc = this.esOrderPrecioDesc = this.esOrderDescripcionAsc = this.esOrderDescripcionDesc = false;
+  }
+
+  updateOrderFlags(columna: string) {
+    // Basado en la columna y orderType, actualizamos la bandera correspondiente
+    switch (columna) {
+      case 'id_comida':
+        if (this.orderType === 1) this.esOrderIdComidaAsc = true;
+        else this.esOrderIdComidaDesc = true;
+        break;
+      case 'nombre':
+        if (this.orderType === 1) this.esOrderNombreAsc = true;
+        else this.esOrderNombreDesc = true;
+        break;
+      case 'codigo':
+        if (this.orderType === 1) this.esOrderCodigoAsc = true;
+        else this.esOrderCodigoDesc = true;
+        break;
+      case 'precio':
+        if (this.orderType === 1) this.esOrderPrecioAsc = true;
+        else this.esOrderPrecioDesc = true;
+        break;
+      case 'descripcion':
+        if (this.orderType === 1) this.esOrderDescripcionAsc = true;
+        else this.esOrderDescripcionDesc = true;
+        break;
+    }
+  }
   
 }
 

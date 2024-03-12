@@ -149,6 +149,66 @@ export class ClientesComponent implements OnInit {
         error: () => this.cargando = false
     });
 }
+
+  orderColumn: string = 'id_cliente'; // Columna por la que se ordena inicialmente
+  orderType: number = 1; // -1 para descendente, 1 para ascendente
+
+  esOrderIdClienteAsc: boolean = false;
+  esOrderIdClienteDesc: boolean = false; // Comienza en orden descendente
+
+  esOrderNombreAsc: boolean = false;
+  esOrderNombreDesc: boolean = false;
+
+  esOrderTelefonoAsc: boolean = false;
+  esOrderTelefonoDesc: boolean = false;
+
+  esOrderDireccionAsc: boolean = false;
+  esOrderDireccionDesc: boolean = false;
+
+  orderTable(columna: string) {
+    // Reiniciar valores para todas las columnas excepto la seleccionada
+    this.resetOrderFlags(columna);
+
+    // Alternar entre ascendente y descendente para la columna seleccionada
+    if (this.orderColumn === columna) {
+      // Si la columna seleccionada ya era la columna de orden, invertimos el orden
+      this.orderType *= -1;
+    } else {
+      // Si seleccionamos una nueva columna, por defecto ordenamos ascendente
+      this.orderType = 1;
+    }
+
+    this.orderColumn = columna;
+    
+    // Actualizar las variables booleanas basadas en orderColumn y orderType
+    this.updateOrderFlags(columna);
+  }
+
+  resetOrderFlags(columna: string) {
+    this.esOrderIdClienteAsc = this.esOrderIdClienteDesc = this.esOrderNombreAsc = this.esOrderNombreDesc = this.esOrderTelefonoAsc = this.esOrderTelefonoDesc = this.esOrderDireccionAsc = this.esOrderDireccionDesc = false;
+  }
+
+  updateOrderFlags(columna: string) {
+    // Basado en la columna y orderType, actualizamos la bandera correspondiente
+    switch (columna) {
+      case 'id_cliente':
+        if (this.orderType === 1) this.esOrderIdClienteAsc = true;
+        else this.esOrderIdClienteDesc = true;
+        break;
+      case 'nombre':
+        if (this.orderType === 1) this.esOrderNombreAsc = true;
+        else this.esOrderNombreDesc = true;
+        break;
+      case 'telefono':
+        if (this.orderType === 1) this.esOrderTelefonoAsc = true;
+        else this.esOrderTelefonoDesc = true;
+        break;
+      case 'direccion':
+        if (this.orderType === 1) this.esOrderDireccionAsc = true;
+        else this.esOrderDireccionDesc = true;
+        break;
+    }
+  }
   
 }
 

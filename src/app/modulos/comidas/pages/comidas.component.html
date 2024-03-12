@@ -19,24 +19,46 @@
             [tableStyle]="{ 'min-width': '50rem', 'padding': '15px' }"
             currentPageReportTemplate="Mostrando {first} a {last}. {totalRecords} registros totales."
             [rowsPerPageOptions]="[5, 10, 25, 50]"
+            [sortField]="orderColumn"
+            [sortOrder]="orderType"
             class="tableListado"
         >
             <ng-template pTemplate="header" >
                 <tr>
                     <th style="width:4%" class="column">
                         #
+                        <button pButton (click)="orderTable('id_comida')" class="btnArrow">
+                            <i class="fas fa-arrow-up flecha" [ngClass]="esOrderIdComidaAsc ? 'flecha-activa' : 'flecha-inactiva'"></i>
+                            <i class="fas fa-arrow-down" [ngClass]="esOrderIdComidaDesc ? 'flecha-activa' : 'flecha-inactiva'"></i>
+                        </button>
                     </th>
                     <th style="width:4%" class="column">
                         Nombre
+                        <button pButton (click)="orderTable('nombre')" class="btnArrow">
+                            <i class="fas fa-arrow-up flecha" [ngClass]="esOrderNombreAsc ? 'flecha-activa' : 'flecha-inactiva'"></i>
+                            <i class="fas fa-arrow-down" [ngClass]="esOrderNombreDesc ? 'flecha-activa' : 'flecha-inactiva'"></i>
+                        </button>
                     </th>
                     <th style="width:4%" class="column">
                         Código
+                        <button pButton (click)="orderTable('codigo')" class="btnArrow">
+                            <i class="fas fa-arrow-up flecha" [ngClass]="esOrderCodigoAsc ? 'flecha-activa' : 'flecha-inactiva'"></i>
+                            <i class="fas fa-arrow-down" [ngClass]="esOrderCodigoDesc ? 'flecha-activa' : 'flecha-inactiva'"></i>
+                        </button>
                     </th>
                     <th style="width:4%" class="column">
                         Precio
+                        <button pButton (click)="orderTable('precio')" class="btnArrow">
+                            <i class="fas fa-arrow-up flecha" [ngClass]="esOrderPrecioAsc ? 'flecha-activa' : 'flecha-inactiva'"></i>
+                            <i class="fas fa-arrow-down" [ngClass]="esOrderPrecioDesc ? 'flecha-activa' : 'flecha-inactiva'"></i>
+                        </button>
                     </th>
                     <th style="width:4%" class="column">
                         Descripcion
+                        <button pButton (click)="orderTable('descripcion')" class="btnArrow">
+                            <i class="fas fa-arrow-up flecha" [ngClass]="esOrderDescripcionAsc ? 'flecha-activa' : 'flecha-inactiva'"></i>
+                            <i class="fas fa-arrow-down" [ngClass]="esOrderDescripcionDesc ? 'flecha-activa' : 'flecha-inactiva'"></i>
+                        </button>
                     </th>               
                     <th style="width:4%" class="column">
                         Detalle

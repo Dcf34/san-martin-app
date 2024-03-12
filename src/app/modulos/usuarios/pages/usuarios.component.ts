@@ -159,7 +159,72 @@ export class UsuariosComponent implements OnInit {
         },
         error: () => this.cargando = false
     });
-}
-  
-}
+  }
 
+  orderColumn: string = 'id_usuario'; // Columna por la que se ordena inicialmente
+  orderType: number = 1; // -1 para descendente, 1 para ascendente
+
+  esOrderIdUsuarioAsc: boolean = false;
+  esOrderIdUsuarioDesc: boolean = false; // Comienza en orden descendente
+
+  esOrderNombreAsc: boolean = false;
+  esOrderNombreDesc: boolean = false;
+
+  esOrderCorreoAsc: boolean = false;
+  esOrderCorreoDesc: boolean = false;
+
+  esOrderTelefonoAsc: boolean = false;
+  esOrderTelefonoDesc: boolean = false;
+
+  esOrderUsuarioAsc: boolean = false;
+  esOrderUsuarioDesc: boolean = false;
+
+  orderTable(columna: string) {
+    // Reiniciar valores para todas las columnas excepto la seleccionada
+    this.resetOrderFlags(columna);
+
+    // Alternar entre ascendente y descendente para la columna seleccionada
+    if (this.orderColumn === columna) {
+      // Si la columna seleccionada ya era la columna de orden, invertimos el orden
+      this.orderType *= -1;
+    } else {
+      // Si seleccionamos una nueva columna, por defecto ordenamos ascendente
+      this.orderType = 1;
+    }
+
+    this.orderColumn = columna;
+    
+    // Actualizar las variables booleanas basadas en orderColumn y orderType
+    this.updateOrderFlags(columna);
+  }
+
+  resetOrderFlags(columna: string) {
+    this.esOrderIdUsuarioAsc = this.esOrderIdUsuarioDesc = this.esOrderNombreAsc = this.esOrderNombreDesc = this.esOrderCorreoAsc = this.esOrderCorreoDesc = this.esOrderTelefonoAsc = this.esOrderTelefonoDesc = this.esOrderUsuarioAsc = this.esOrderUsuarioDesc = false;
+  }
+
+  updateOrderFlags(columna: string) {
+    // Basado en la columna y orderType, actualizamos la bandera correspondiente
+    switch (columna) {
+      case 'id_usuario':
+        if (this.orderType === 1) this.esOrderIdUsuarioAsc = true;
+        else this.esOrderIdUsuarioDesc = true;
+        break;
+      case 'nombre':
+        if (this.orderType === 1) this.esOrderNombreAsc = true;
+        else this.esOrderNombreDesc = true;
+        break;
+      case 'correo':
+        if (this.orderType === 1) this.esOrderCorreoAsc = true;
+        else this.esOrderCorreoDesc = true;
+        break;
+      case 'telefono':
+        if (this.orderType === 1) this.esOrderTelefonoAsc = true;
+        else this.esOrderTelefonoDesc = true;
+        break;
+      case 'cuenta_usuario':
+        if (this.orderType === 1) this.esOrderUsuarioAsc = true;
+        else this.esOrderUsuarioDesc = true;
+        break;
+    }
+  }
+}
