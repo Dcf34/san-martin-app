@@ -1,0 +1,39 @@
+//Datos encabezasdo tabla
+::ng-deep .p-datatable .p-datatable-thead > tr > th[class="red_header"]{
+    background-color: black;
+    padding: 5px;
+    text-align: center;
+    font-size: 14px;
+    color: white;
+  }
+  
+  ::ng-deep .p-dialog .p-dialog-header i[class="pi pi-search"]{
+    margin-right: 20px;
+  }
+  
+  ::ng-deep .p-dialog-header-icon.p-dialog-header-maximize {
+    color: white;
+  }
+  
+  ::ng-deep .p-dialog .p-dialog-header{
+    background-color: black;
+    padding: 10px 15px;
+    color: white;
+  }
+  
+  ::ng-deep .p-dialog .p-dialog-content{
+    padding: 20px;
+    padding-bottom: 5px;
+  }
+
+  .full-wd{
+    width: 100%;
+  }
+
+  ::ng-deep .custom-header-content i{
+    margin-right: 5px;
+  }
+
+.formClass{
+    padding: 10px;
+}

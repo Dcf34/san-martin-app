@@ -1,0 +1,70 @@
+<app-navbar>
+    <div class="page-content">
+
+        <div class="row" style="width: 100%;">
+            <div class="col-4 whitebox" (click)="abrirModulo('ventas')">
+                <div class="card boton">
+                    <h1>Reporte de Ventas</h1>
+                    <p class="m-0">
+                        <i class="fas fa-cash-register iconoModulo"></i>
+                        Reporte de ventas registradas.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="col-4 whitebox" (click)="abrirModulo('venta-detalle')">
+                <div class="card boton">
+                    <h1>Reporte de Detalle de Venta</h1>
+                    <p class="m-0">
+                        <i class="fas fa-cash-register iconoModulo"></i>
+                        Reporte detallado de una venta realizada.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-4 whitebox" (click)="abrirModulo('clientes')">
+                <div class="card boton">
+                    <h1>Reporte de Clientes</h1>
+                    <p class="m-0">
+                        <i class="fas fa-users iconoModulo"></i>
+                        Reporte de clientes dados de alta.
+                    </p>
+                </div>
+            </div>
+        </div>   
+
+        <div class="row rowAbajo" style="width: 100%;">
+
+            <div class="col-4 whitebox" (click)="abrirModulo('pedidos')">
+                <div class="card boton">
+                    <h1>Reporte de Pedidos</h1>
+                    <p class="m-0">
+                        <i class="fas fa-edit iconoModulo"></i>
+                        Reporte de pedidos realizados.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="col-4 whitebox" (click)="abrirModulo('comidas')">
+                <div class="card boton">
+                    <h1>Reporte de Comidas</h1>
+                    <p class="m-0">
+                        <i class="pi pi-apple iconoModulo"></i>
+                        Reporte de comidas registradas.
+                    </p>
+                </div>
+            </div>
+
+        </div>   
+        
+       
+    </div>
+</app-navbar>
+
+<p-toast></p-toast>
+
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">

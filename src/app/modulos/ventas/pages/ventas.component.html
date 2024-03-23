@@ -1,0 +1,35 @@
+<app-navbar>
+    <div class="page-content">
+
+        <div class="row" style="width: 100%;">
+            <div class="col 6 whitebox" (click)="abrirModulo('nueva-venta')">
+                <div class="card boton">
+                    <h1>Nueva Venta</h1>
+                    <p class="m-0">
+                        <i class="fas fa-cash-register iconoModulo"></i>
+                        Registro de nuevas ventas.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="col 6 whitebox" (click)="abrirModulo('historial')">
+                <div class="card boton">
+                    <h1>Historial</h1>
+                    <p class="m-0">
+                        <i class="fas fa-history iconoModulo"></i>
+                        Historial de ventas realizadas anteriormente.
+                    </p>
+                </div>
+            </div>
+        </div>   
+        
+       
+    </div>
+</app-navbar>
+
+<p-toast></p-toast>
+
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">

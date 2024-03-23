@@ -8,9 +8,15 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { ToastModule } from 'primeng/toast';
 import { MessagesModule } from 'primeng/messages';
 import { ProgressBarModule } from 'primeng/progressbar';
+import { EditPerfilComponent } from './modal-edit-perfil/modal-edit-perfil.component';
+import { InputTextModule } from 'primeng/inputtext';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [NavbarComponent],
+  declarations: [
+    NavbarComponent,
+    EditPerfilComponent
+  ],
   exports: [NavbarComponent],
   imports: [CommonModule,
     SidebarModule,
@@ -20,7 +26,9 @@ import { ProgressBarModule } from 'primeng/progressbar';
     MessagesModule,
     BreadcrumbModule,
     ProgressBarModule,
-    SidebarModule
+    SidebarModule,
+    InputTextModule,
+    FormsModule
   ]
 })
 export class NavbarModule { }

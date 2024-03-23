@@ -1,0 +1,198 @@
+@import '../../../../../../assets/css/material-dashboard.css';
+
+::ng-deep .p-dropdown.p-component {
+    width: 100%;
+    border: 0px;
+    border-bottom: 1px solid #d3d3d3;
+}
+
+::ng-deep .form_input{
+    width: 100%;
+    border: 0px;
+    text-align: center !important;
+    border-bottom: 1px solid #d3d3d3;
+}
+
+::ng-deep .btnBuscar{
+    background-color: rgb(54, 110, 196);
+}
+
+
+::ng-deep .btnBuscar:hover{
+    background-color: rgb(103, 164, 255) !important;
+}
+
+::ng-deep .btnAgregar{
+    background-color: rgb(196, 40, 40);
+    border-radius: 10px !important;
+}
+
+
+::ng-deep .btnAgregar:hover{
+    background-color: rgb(236, 62, 62) !important;
+}
+
+.label-centered {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: block !important;
+}
+
+/* Para Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Para Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+h2 {
+    font-size:  26px;
+    font-weight: bold;
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+}
+
+::ng-deep .card {
+    margin-top: 5px;
+}
+
+.input-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dollar-sign {
+    position: absolute;
+    left: 10px; /* Ajusta según el padding de tu input */
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none; /* Evita que el símbolo interfiera con el clic en el input */
+  }
+  
+  .form_input {
+    padding-left: 20px; /* Asegura que haya espacio para el símbolo de dólar */
+  }
+
+
+/* estilos de la tabla de elementos de venta */
+
+/* Estilos existentes */
+.rows {
+    text-align: center;
+  }
+  
+  .column {
+    text-align: center;
+  }
+
+
+//-- Contenido--//
+
+
+.fullWidthDiv {
+  width: 100%;
+}
+
+.fullWidthDiv h1 {
+  width: 100%; /* Ocupa el ancho completo del div */
+}
+
+.subtotalText h3{
+    text-align: center;
+}
+
+::ng-deep .p-element.tableListado .p-datatable .p-paginator-bottom{
+    display: none;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+}
+
+.menu-item i {
+  margin-right: 8px; /* Espacio entre el icono y el texto */
+}
+
+.menu-item .icon {
+  font-size: 24px; /* Cambia el tamaño de los íconos */
+}
+
+.circular-button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent !important;
+  font-size: 2rem !important;
+  color: black !important;
+}
+
+.circular-button {
+  border: 3px solid black !important;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 20px; 
+  padding: 10px;
+}
+
+.other-button {
+  margin-left: 10px;
+  height: 30px;
+  background-color: black !important;
+  border: 1px solid black !important;
+}
+
+.other-button:hover {
+  border: 3px solid rgb(83, 83, 83) !important;
+}
+
+::ng-deep .p-element.tableListado .p-datatable .p-datatable-tbody > tr > td {
+  padding: 5px; 
+  text-align: center;
+  font-size: 14px;
+  color:black;
+}
+
+::ng-deep .p-element.tableListado .p-datatable .p-datatable-thead > tr > th{
+    background-color: black;
+    text-align: center;
+    color: white;
+}
+
+.darkText{
+    color: black;
+}
+
+.containerTotal{
+    border: 2px solid black;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+.subtotalText{
+    border-right: 2px solid black;
+}
+
+.totalVenta{
+    text-align: center;
+}
+
+.headerVenta{
+    background-color: black !important;
+}
+
+.headerCliente{
+    background-color: rgb(128, 201, 60) !important;
+}

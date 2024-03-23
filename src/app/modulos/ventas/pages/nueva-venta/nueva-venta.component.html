@@ -1,0 +1,268 @@
+<app-navbar>
+    <div class="page-content">
+        <p-progressBar mode="indeterminate" *ngIf="cargando"></p-progressBar>
+        <br *ngIf="cargando">
+        
+        <div class="row" style="width: 102%;">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <h2>Datos del Cliente</h2>
+                </div>
+
+                <div class="container_btnGenerar">
+                    <button (click)="guardarVenta()"
+                                [disabled]="cargando || !idClienteSeleccionado || elementosSeleccionados.length === 0 || !verificarDescuentos()"
+                                class="btn-morado" 
+                                pButton
+                                icon="fas fa-save"
+                                label="Generar venta"
+                                id="btn_generar">
+                    </button>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header bg-primary text-white text-center headClientes">
+                        Cliente
+                    </div>
+                    <div class="card-body">
+                       
+                        <div class="row" style="width: 100%;">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="label-centered darkText">Nombre</label>
+                                    <p-dropdown class="drop_select elementExpanded" 
+                                            [options]="clientes" optionLabel="nombre" 
+                                            optionValue="id_cliente"
+                                            placeholder="Selecciona un cliente..."
+                                            [(ngModel)]="idClienteSeleccionado"
+                                            (onChange)="escogerCliente()"
+                                        >
+                                    </p-dropdown>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="label-centered darkText">Teléfono</label>
+                                    <input type="number" 
+                                    name="tel_cliente" id="tel_cliente" 
+                                    class="form_input darkText" placeholder="Telefono"
+                                    [(ngModel)]="clienteSeleccionado.telefono"
+                                    pInputText
+                                    disabled >
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="label-centered darkText">Dirección</label>
+                                    <input type="text" 
+                                    name="dir_cliente" id="dir_cliente" 
+                                    class="form_input darkText" placeholder="Dirección"
+                                    [(ngModel)]="clienteSeleccionado.direccion"
+                                    pInputText
+                                    disabled >
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header bg-primary text-white text-center">
+                        Comidas
+                    </div>
+                    <div class="card-body">
+                        <div class="row" style="width: 100%;">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class="label-centered darkText" for="producto">Código o Nombre</label>
+                                    <p-dropdown class="drop_select elementExpanded" 
+                                            [options]="comidas" optionLabel="nombre" 
+                                            optionValue="id_comida"
+                                            placeholder="Selecciona una comida..."
+                                            [(ngModel)]="idComidaSeleccionada"
+                                            (onChange)="escogerComida()"
+                                        >
+                                    </p-dropdown>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label class="label-centered darkText" for="cantidad">Cantidad</label>
+                                    <input type="number" 
+                                    name="cant_comida" id="cant_comida" 
+                                    class="form_input darkText" 
+                                    placeholder="Cantidad"
+                                    [(ngModel)]="cantidadComida"
+                                    pInputText
+                                    [disabled]="!idComidaSeleccionada"
+                                    (change)="actualizarSubtotal()"
+                                    required>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group" style="width: 100%;">
+                                    <label class="label-centered darkText" for="precio">Precio</label>
+                                    <div class="input-wrapper darkText" style="width: 100%;">
+                                        <span class="dollar-sign darkText">$</span>
+                                        <input type="text" [(ngModel)]="comidaSeleccionada.precio"
+                                               name="precio_comida" id="precio_comida"
+                                               class="form_input darkText" 
+                                               placeholder="Precio"
+                                               pInputText
+                                               disabled required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label class="label-centered darkText" for="sub_total">Sub Total</label>
+                                    <div class="input-wrapper darkText" style="width: 100%;">
+                                        <span class="dollar-sign darkText">$</span>
+                                        <input type="number" 
+                                        name="subTotal_comida" id="subTotal_comida" 
+                                        class="form_input darkText" 
+                                        placeholder="Subtotal"
+                                        [(ngModel)]="subTotalComida"
+                                        pInputText
+                                        disabled required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <button pButton icon="pi pi-plus" 
+                                    label="Agregar" class="btnAgregar" 
+                                    style="width: 100%;"
+                                    [disabled]="!cantidadComida"
+                                    (click)="agregarElemento()"
+                                    >
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <div>
+                            <button pButton icon="pi pi-plus" label="Agregar" class="btnAgregar" style="width: 100%;"></button>
+                        </div> -->
+        
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <p-table
+                        [value]="elementosSeleccionados"
+                        [paginator]="true"
+                        [rows]="30"
+                        [showCurrentPageReport]="true"
+                        [tableStyle]="{ 'min-width': '50rem', 'padding': '15px' }"
+                        currentPageReportTemplate="Mostrando {first} a {last}. {totalRecords} registros totales."
+                        [rowsPerPageOptions]="[5, 10, 25, 50]"
+                        class="tableListado"
+                    >
+                        <ng-template pTemplate="header" >
+                            <tr>
+                                <th style="width:4%" class="column">
+                                    #
+                                </th>
+                                <th style="width:4%" class="column">
+                                    Descripcion
+                                </th>
+                                <th style="width:4%" class="column">
+                                    Precio
+                                </th>
+                                <th style="width:4%" class="column">
+                                    Cantidad
+                                </th>
+                                <th style="width:4%" class="column">
+                                    Aplica Desc.
+                                </th>
+                                <th style="width:4%" class="column">
+                                    Descuento
+                                </th>
+                                <th style="width:4%" class="column">
+                                    Subtotal
+                                </th>
+                                <th style="width:4%" class="column">
+                                    Acción
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-i>
+                            <tr>
+                                <td class="rows">{{ i.id_comida }}</td>
+                                <td class="rows">{{ i.descripcion }}</td>
+                                <td class="rows">${{ i.precio }}</td>
+                                <td class="rows">{{ i.cantidad }}</td>
+                                <td class="rows">
+                                    <p-checkbox [(ngModel)]="i.aplica_desc" [binary]="true" 
+                                        inputId="cheknoadeudo" (onChange)="verificarDescuento(i)"
+                                    >
+                                    </p-checkbox>
+                                </td>
+                                <td class="rows">
+                                    <div class="input-wrapper" style="width: 100%;">
+                                        <span class="dollar-sign">%</span>
+                                        <input type="number" 
+                                        name="desc_comida" id="desc_comida" 
+                                        class="form_input" 
+                                        placeholder="Descuento..."
+                                        [(ngModel)]="i.descuento"
+                                        pInputText
+                                        [disabled]="!i.aplica_desc"
+                                        min="1" max="100"
+                                        (ngModelChange)="validarDescuentoTemporal(i, $event)"
+                                    >
+                                    </div>
+                                </td>
+                                <td class="rows">${{ verificarSubtotal(i) }}</td>
+                                <td class="rows">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <button pButton class="p-button-danger"
+                                            icon="pi pi-trash"
+                                            (click)="eliminarElemento(i)"
+                                            >
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                    
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <!-- <ng-template pTemplate="paginatorleft">
+                    
+                        </ng-template>
+                        <ng-template pTemplate="paginatorright">
+                    
+                        </ng-template> -->
+                    </p-table>
+        
+                </div>
+
+                
+            </div>
+
+        
+        </div>
+
+        <div class="containerTotal">
+            <div class="row" style="width: 100%;">
+                <div class="col-4 subtotalText">
+                    <h3>Total:</h3>
+                </div>
+                <div class="col-8">
+                    <h3 class="totalVenta">$ {{verificarTotalVenta()}}</h3>
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
+</app-navbar>
+
+<p-toast></p-toast>
+
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">

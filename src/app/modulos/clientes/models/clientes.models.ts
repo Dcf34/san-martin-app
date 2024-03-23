@@ -8,6 +8,7 @@ export interface Cliente {
     nombre?: string;
     telefono?: string;
     direccion?: string;
+    idYNombre?: string;
 }
 
 export interface FiltroCliente {

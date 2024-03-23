@@ -96,7 +96,7 @@ export class AuthService {
   }
 
   public obtenerIdUsuarioModificacion() {
-    const idUsuario = localStorage.getItem(localStorageKeys.usuario) ?? '';
+    const idUsuario = localStorage.getItem(localStorageKeys.id_usuario) ?? '';
     return +idUsuario;
   }
 

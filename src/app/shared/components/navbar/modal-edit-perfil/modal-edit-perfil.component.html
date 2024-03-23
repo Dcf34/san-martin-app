@@ -1,0 +1,86 @@
+<div class="row formClass" style="width: 100%">
+    <div class="p-col-12">
+        <span class="p-float-label" style="width: 100%; margin-bottom: 15px;">
+            <input
+                id="float-nombre"
+                class="full-wd"
+                pInputText
+                type="text"
+                style="height: 35px; margin-bottom: 10px;"
+                [(ngModel)]="usuario.nombre"
+                name="nombre"
+            />
+            <label for="float-nombre">Nombre</label>
+        </span>
+    </div>
+
+    <div class="p-col-12">
+        <span class="p-float-label" style="width: 100%; margin-bottom: 15px;">
+            <input
+                id="float-correo"
+                class="full-wd"
+                pInputText
+                type="text"
+                style="height: 35px; margin-bottom: 10px;"
+                [(ngModel)]="usuario.correo"
+                name="correo"
+            />
+            <label for="float-nombre">Correo</label>
+        </span>
+    </div>
+
+    <div class="p-col-12">
+        <span class="p-float-label" style="width: 100%; margin-bottom: 15px;">
+            <input
+                id="float-usuario"
+                class="full-wd"
+                pInputText
+                type="text"
+                style="height: 35px; margin-bottom: 10px;"
+                [(ngModel)]="usuario.cuenta_usuario"
+                name="usuario"
+            />
+            <label for="float-nombre">Usuario</label>
+        </span>
+    </div>
+
+    <div class="p-col-12">
+        <span class="p-float-label" style="width: 100%; margin-bottom: 15px;">
+            <input
+                id="float-telefono"
+                class="full-wd"
+                pInputText
+                type="text"
+                style="height: 35px; margin-bottom: 10px;"
+                [(ngModel)]="usuario.telefono"
+                name="telefono"
+            />
+            <label for="float-nombre">Teléfono</label>
+        </span>
+    </div>
+
+    <div class="p-col-12">
+        <span class="p-float-label" style="width: 100%;">
+            <input
+                id="float-clave"
+                class="full-wd"
+                pInputText
+                type="password"
+                style="height: 35px; margin-bottom: 10px;"
+                [(ngModel)]="usuario.clave"
+                name="contraseña"
+            />
+            <label for="float-nombre">Contraseña</label>
+        </span>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-end">
+            <button pButton class="p-button-danger mr-2" (click)="cerrar(false)">Cancelar</button>
+            <button pButton class="p-button-success" (click)="actualizarDatos(true)" [disabled]="cargando">Confirmar</button>
+        </div>
+    </div>
+</div>

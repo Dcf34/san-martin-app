@@ -95,6 +95,15 @@ export class InicioComponent implements OnInit {
     else if(modulo == 'comidas') {
       ruta = rutasAplicativo.comidas.inicio;
     }
+    else if(modulo == 'ventas') {
+      ruta = rutasAplicativo.ventas.inicio;
+    }
+    else if(modulo == 'pedidos') {
+      ruta = rutasAplicativo.pedidos.inicio;
+    }
+    else if(modulo == 'reportes') {
+      ruta = rutasAplicativo.reportes.inicio;
+    }
 
     this.router.navigateByUrl(ruta);
   }

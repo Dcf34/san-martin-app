@@ -1,5 +1,7 @@
 <app-navbar>
     <div class="page-content">
+        <p-progressBar mode="indeterminate" *ngIf="cargando"></p-progressBar>
+        <br *ngIf="cargando">
 
         <div class="row" style="width: 100%;">
             <div class="col-md-6 mx-auto">
@@ -26,7 +28,7 @@
                             <input type="text" name="direccion" [(ngModel)]="datosEmpresa.direccion" class="form-control" id="txtDirEmpresa" placeholder="Dirreción de la Empresa" required>
                         </div>
                         <div>
-                            <button (click)="guardar()" type="button" class="btn btn-primary"><i class="fas fa-save"></i> Modificar Datos</button>
+                            <button [disabled]="cargando" (click)="guardar()" type="button" class="btn btn-primary"><i class="fas fa-save"></i> Modificar Datos</button>
                         </div>
         
                     </div>

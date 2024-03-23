@@ -4,6 +4,8 @@ import { MenuItem } from 'primeng/api';
 import { rutasAplicativo } from 'src/app/core/config';
 import { AuthService } from '../../../modulos/login/services/auth.service';
 import { NavbarService } from 'src/app/shared/services/navbar.items.service';
+import { DialogService } from 'primeng/dynamicdialog';
+import { EditPerfilComponent } from './modal-edit-perfil/modal-edit-perfil.component';
 
 @Component({
   selector: 'app-navbar',
@@ -19,7 +21,8 @@ export class NavbarComponent implements OnInit{
   constructor(
     private router:Router,
     private authService:AuthService,
-    private datosMenuService: NavbarService
+    private datosMenuService: NavbarService,
+    private dialogService: DialogService
   ) {
     this.checkScreenWidth();
   }
@@ -53,6 +56,9 @@ export class NavbarComponent implements OnInit{
     this.mostrarBtnUser = window.innerWidth >= 1000;
     this.mostrarBtnMenu = window.innerWidth < 1000;
 
+    if(window.innerWidth >= 1000 && this.visibleSidebar == true){
+      this.visibleSidebar = false;
+    }
   }
 
   mostrarEnConsola() {
@@ -83,6 +89,15 @@ export class NavbarComponent implements OnInit{
     else if(modulo == 'configuracion') {
       ruta = rutasAplicativo.configuracion.inicio;
     }
+    else if(modulo == 'ventas') {
+      ruta = rutasAplicativo.ventas.inicio;
+    }
+    else if(modulo == 'pedidos') {
+      ruta = rutasAplicativo.pedidos.inicio;
+    }
+    else if(modulo == 'reportes') {
+      ruta = rutasAplicativo.reportes.inicio;
+    }
 
     this.router.navigateByUrl(ruta);
   }
@@ -91,7 +106,22 @@ export class NavbarComponent implements OnInit{
     this.authService.limpiarSesion();
   }
   
+  abrirModalPerfil(){
+    const ref = this.dialogService.open(EditPerfilComponent, {
+      header: 'Editar Perfil',
+      width: '40%',
+      data: {
+      }
+    });
 
+    ref.onClose.subscribe((value: boolean) => {
+      // Aquí puedes manejar la descripción que se recibe al cerrar el diálogo
+      if(value == true){
+        location.reload();
+      }
+      
+    });
+}
 
 
 }

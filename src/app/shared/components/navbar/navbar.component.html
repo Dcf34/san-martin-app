@@ -8,8 +8,9 @@
             <li (click)="abrirModulo('clientes')" class="container-item title_navbar"><i class="fas fa-users"></i><a> Clientes</a></li>
             <li (click)="abrirModulo('comidas')" class="container-item title_navbar"><i class="pi pi-apple"></i><a> Comidas</a></li>
             <li (click)="abrirModulo('configuracion')" class="container-item title_navbar"><i class="fas fa-cogs"></i><a> Configuración</a></li>
-            <li class="container-item title_navbar"><i class="fas fa-cash-register"></i><a> Nueva Venta</a></li>
-            <li class="container-item title_navbar"><i class="fas fa-cart-plus"></i><a> Historial Ventas</a></li>
+            <li (click)="abrirModulo('ventas')" class="container-item title_navbar"><i class="fas fa-cash-register"></i><a> Ventas</a></li>
+            <li (click)="abrirModulo('pedidos')" class="container-item title_navbar"><i class="fas fa-edit"></i><a> Pedidos</a></li>
+            <li (click)="abrirModulo('reportes')" class="container-item title_navbar"><i class="fas fa-file-pdf"></i><a> Reportes</a></li>
 
         </ul>
     </div>
@@ -21,6 +22,10 @@
             <div class="dropdown" *ngIf="mostrarBtnUser">
                 <button class="user-button" (click)="mostrarBtnClose()"><i class="fas fa-user"></i></button>
                 <div class="dropdown-content" *ngIf="mostrarDropdown">
+                    <div class="option">
+                        <span (click)="abrirModalPerfil()">Editar Perfil</span>
+                    </div>
+
                     <div class="option">
                         <span (click)="cerrarSesion()">Cerrar Sesión</span>
                     </div>
@@ -59,8 +64,9 @@
       <li (click)="abrirModulo('clientes'); visibleSidebar=false" class="container-item title_navbar item_sidebar"><i class="fas fa-users"></i><a> Clientes</a></li>
       <li (click)="abrirModulo('comidas'); visibleSidebar=false" class="container-item title_navbar item_sidebar"><i class="pi pi-apple"></i><a> Comidas</a></li>
       <li (click)="abrirModulo('configuracion'); visibleSidebar=false" class="container-item title_navbar item_sidebar"><i class="fas fa-cogs"></i><a> Configuración</a></li>
-      <li (click)="visibleSidebar=false" class="container-item title_navbar item_sidebar"><i class="fas fa-cash-register"></i><a> Nueva Venta</a></li>
-      <li (click)="visibleSidebar=false" class="container-item title_navbar item_sidebar"><i class="fas fa-cart-plus"></i><a> Historial Ventas</a></li>
+      <li (click)="abrirModulo('ventas'); visibleSidebar=false" class="container-item title_navbar item_sidebar"><i class="fas fa-cash-register"></i><a> Ventas</a></li>
+      <li (click)="abrirModulo('pedidos'); visibleSidebar=false" class="container-item title_navbar item_sidebar"><i class="fas fa-edit"></i><a> Pedidos</a></li>
+      <li (click)="abrirModulo('reportes'); visibleSidebar=false" class="container-item title_navbar item_sidebar"><i class="fas fa-file-pdf"></i><a> Reportes</a></li>
       <li (click)="cerrarSesion(); visibleSidebar=false;" class="container-item title_navbar btnCloseSesion item_sidebar"><i class="fas fa-sign-out-alt"></i><a> Cerrar Sesión</a></li>
     </ul>
 </p-sidebar>

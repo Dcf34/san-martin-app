@@ -1,0 +1,162 @@
+<app-navbar>
+    <div class="page-content">
+        <p-progressBar mode="indeterminate" *ngIf="cargando"></p-progressBar>
+        <br *ngIf="cargando">
+
+        <div class="white_box">
+            <div class="titulo" style="width: 100%; height:30px; margin-bottom: 30px;">
+                <h1>Filtros Generales:</h1>
+            </div>
+
+            <div class="row" style="width: 100%;">
+                
+                <div class="col-6">
+                    <div class="row"  style="width: 100%;">
+
+
+                        <div class="col-12 element">
+                            <span class="p-input-icon-left p-float-label" style="width: 100%;">
+                                <i class="pi pi-search"></i>
+                                <input
+                                  id="float-id_venta"
+                                  class="full-wd"
+                                  type="number"
+                                  pInputText
+                                  style="height: 100%; margin-bottom: 10px;"
+                                  [(ngModel)]="filtroVentas.id_venta"
+                                  name="idVenta"
+                                />
+                                <label for="float-idVenta">ID Venta</label>
+                            </span>
+                      
+                        </div>
+
+                        <div class="col-12 element">
+                            <span class="p-float-label divDropdown" style="width: 100%;">
+                                <p-dropdown
+                                    id="float-idCliente"
+                                    [options]="clientes"
+                                    [(ngModel)]="filtroVentas.id_cliente"
+                                    name="float-idCliente"
+                                    [ngStyle]="{'margin-bottom': '30px'}"
+                                    class="form-control dropDownFull"
+                                    optionLabel="idYNombre" optionValue="id_cliente"
+                                    placeholder="Selecciona un cliente"
+                                >
+                                </p-dropdown>
+                                <label for="float-nombre">Cliente</label>
+                            </span>
+                        </div>
+
+                        <div class="col-12 element">
+                            <span class="p-input-icon-left p-float-label" style="width: 100%;">
+                                <i class="fas fa-dollar-sign"></i>
+                                <input
+                                  id="float-total_desde"
+                                  class="full-wd"
+                                  type="number"
+                                  pInputText
+                                  style="height: 100%; margin-bottom: 10px;"
+                                  [(ngModel)]="filtroVentas.total_desde"
+                                  name="total_desde"
+                                />
+                                <label for="float-total_desde">Total mínimo</label>
+                            </span>
+                      
+                        </div>
+
+                        <div class="col-12 element">
+                            <span class="p-input-icon-left p-float-label" style="width: 100%;">
+                                <i class="fas fa-dollar-sign"></i>
+                                <input
+                                  id="float-total_hasta"
+                                  class="full-wd"
+                                  type="number"
+                                  pInputText
+                                  style="height: 100%; margin-bottom: 10px;"
+                                  [(ngModel)]="filtroVentas.total_hasta"
+                                  name="total_hasta"
+                                />
+                                <label for="float-total_hasta">Total máximo</label>
+                            </span>
+                      
+                        </div>
+
+                        <div class="col-12 element">
+                            <div class="p-input-icon-left p-float-label" style="width: 100%;">
+                                <p-calendar class="fechaBajaRango" [showIcon]="true" name="fechasRango" selectionMode="range"
+                                [(ngModel)]="fechasRango" dateFormat="yy-mm-dd" placeholder="Selecciona rango de fecha">
+                                </p-calendar>
+                                <label for="fechasRango">Rango de fecha de venta:</label><br>
+                            </div>
+                      
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="col-6 d-flex justify-content-center align-items-center" >
+                    <div class="button-contenedor">
+                        <button pButton icon="pi pi-download" 
+                            class="p-button-danger btnDescarga" 
+                            label="Descargar Reporte"
+                            (click)="descargarReporte()"
+                            [disabled]="cargando"
+                        >
+                        </button>
+
+                        <button pButton icon="pi pi-filter" 
+                            class="p-button-secondary btnDescarga" 
+                            label="Limpiar Filtros"
+                            (click)="limpiarFiltros()"
+                            [disabled]="cargando"
+                        >
+                        </button>
+                    </div>                    
+                </div>
+
+                
+
+                
+
+                <!-- <div class="col-12">
+                        <div class="p-fluid p-formgrid p-grid">
+                            <div class="p-field p-col fecha-baja-container">
+                                <div>
+                                    <label for="fecha_baja_desde" class="lblInput titulo">Fecha Baja:</label><br>
+                                    <p-calendar class="fechaBajaRango" [showIcon]="true" name="fechaBajaRango" selectionMode="range"
+                                        [(ngModel)]="fechasBajaRango" dateFormat="yy-mm-dd" placeholder="Selecciona rango de fecha">
+                                    </p-calendar>
+                                </div>
+                            </div>
+                            <div class="p-field p-col fecha-creacion-container">
+                                <div>
+                                    <label for="fecha_creacion_desde" class="lblInput titulo">Fecha Creación:</label><br>
+                                    <p-calendar class="fechaCreacionRango" [showIcon]="true" name="fechaCreacionRango" selectionMode="range"
+                                    [(ngModel)]="fechasCreacionRango" dateFormat="yy-mm-dd" placeholder="Seleccione un rango de fecha">
+                                    </p-calendar>
+                                </div>
+                  
+                                <div class="button-group">
+                                    <button type="submit" pButton label="Consultar" class="p-button p-button-danger firstBtnGroup"></button>
+                                    <button type="button" pButton label="Borrar" (click)="borrarFiltros()" class="p-button p-button-danger"></button>
+                                </div>
+                            </div>
+                        </div>
+                </div> -->
+
+                
+
+
+            </div>
+        </div>       
+       
+    </div>
+</app-navbar>
+
+<p-toast></p-toast>
+
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">

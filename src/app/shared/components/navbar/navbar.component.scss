@@ -34,7 +34,10 @@
 
 .sidebar {
   width: 20%;
-  background-color: black;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('../../../../assets/img/mariscos_img.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   color: white;
   height: 100vh;
   padding: 15px;

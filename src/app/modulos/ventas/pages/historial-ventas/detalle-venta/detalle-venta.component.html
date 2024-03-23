@@ -1,0 +1,191 @@
+<app-navbar>
+    <div class="page-content">
+        <p-progressBar mode="indeterminate" *ngIf="cargando"></p-progressBar>
+        <br *ngIf="cargando">
+        
+        <div class="row" style="width: 102%;">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <h2>Detalle de Venta</h2>
+                </div>
+                <div class="card">
+                    <div class="card-header bg-primary text-white text-center headerVenta">
+                        Datos generales
+                    </div>
+                    <div class="card-body">
+                       
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="label-centered darkText">#</label>
+                                    <input type="text" 
+                                    name="cod_venta" id="cod_venta" 
+                                    class="form_input darkText" 
+                                    [(ngModel)]="venta.id_venta"
+                                    pInputText
+                                    disabled >
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="label-centered darkText">Código de Venta</label>
+                                    <input type="text" 
+                                    name="cod_venta" id="cod_venta" 
+                                    class="form_input darkText" 
+                                    [(ngModel)]="venta.codigo_venta"
+                                    pInputText
+                                    disabled >
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="label-centered darkText">Fecha Venta</label>
+                                    <input type="text" 
+                                    name="tel_cliente" id="tel_cliente" 
+                                    class="form_input darkText" 
+                                    [value]="obtenerFechaVenta()"
+                                    pInputText
+                                    disabled >
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header bg-primary text-white text-center headerCliente">
+                        Cliente
+                    </div>
+                    <div class="card-body">
+                       
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="label-centered darkText">Nombre</label>
+                                    <input type="text" 
+                                    name="nom_cliente" id="nom_cliente" 
+                                    class="form_input darkText" 
+                                    [(ngModel)]="cliente.nombre"
+                                    pInputText
+                                    disabled >
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="label-centered darkText">Teléfono</label>
+                                    <input type="number" 
+                                    name="tel_cliente" id="tel_cliente" 
+                                    class="form_input darkText" 
+                                    [(ngModel)]="cliente.telefono"
+                                    pInputText
+                                    disabled >
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="label-centered darkText">Dirección</label>
+                                    <input type="text" 
+                                    name="dir_cliente" id="dir_cliente" 
+                                    class="form_input darkText"
+                                    [(ngModel)]="cliente.direccion"
+                                    pInputText
+                                    disabled >
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <div class="table-responsive">
+                    <p-table
+                        [value]="detallesVenta"
+                        [paginator]="true"
+                        [rows]="30"
+                        [showCurrentPageReport]="true"
+                        [tableStyle]="{ 'min-width': '50rem', 'padding': '15px' }"
+                        currentPageReportTemplate="Mostrando {first} a {last}. {totalRecords} registros totales."
+                        [rowsPerPageOptions]="[5, 10, 25, 50]"
+                        class="tableListado"
+                    >
+                        <ng-template pTemplate="header" >
+                            <tr>
+                                <th style="width:4%" class="column">
+                                    #
+                                </th>
+                                <th style="width:4%" class="column">
+                                    Descripcion
+                                </th>
+                                <th style="width:4%" class="column">
+                                    Precio
+                                </th>
+                                <th style="width:4%" class="column">
+                                    Cantidad
+                                </th>
+                                <th style="width:4%" class="column">
+                                    Aplica Desc.
+                                </th>
+                                <th style="width:4%" class="column">
+                                    Descuento
+                                </th>
+                                <th style="width:4%" class="column">
+                                    Subtotal
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-i>
+                            <tr>
+                                <td class="rows">{{ i.id_detalle_venta }}</td>
+                                <td class="rows">{{ i.descripcion }}</td>
+                                <td class="rows">${{ i.precio }}</td>
+                                <td class="rows">{{ i.cantidad }}</td>
+                                <td class="rows">
+                                    <p-checkbox [(ngModel)]="i.aplica_desc" [binary]="true" 
+                                        inputId="cheknoadeudo" [disabled]="true"
+                                    >
+                                    </p-checkbox>
+                                </td>
+                                <td class="rows">{{ i.descuento !== undefined && i.descuento !== null ? i.descuento + ' %' : ''}}</td>
+                                <td class="rows">${{ obtenerSubtotalDecimal(i.subtotal) }}</td>
+                                
+                            </tr>
+                        </ng-template>
+                        <!-- <ng-template pTemplate="paginatorleft">
+                    
+                        </ng-template>
+                        <ng-template pTemplate="paginatorright">
+                    
+                        </ng-template> -->
+                    </p-table>
+        
+                </div>
+
+                
+            </div>
+            
+        
+        </div>
+
+        <div class="containerTotal">
+            <div class="row" style="width: 100%;">
+                <div class="col-4 subtotalText">
+                    <h3>Total:</h3>
+                </div>
+                <div class="col-8">
+                    <h3 class="totalVenta">$ {{totalVenta}}</h3>
+                </div>
+            </div>
+            
+        </div>
+            
+        
+    </div>
+</app-navbar>
+
+<p-toast></p-toast>
+
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">

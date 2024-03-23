@@ -148,7 +148,7 @@ export class ClientesComponent implements OnInit {
         },
         error: () => this.cargando = false
     });
-}
+  }
 
   orderColumn: string = 'id_cliente'; // Columna por la que se ordena inicialmente
   orderType: number = 1; // -1 para descendente, 1 para ascendente

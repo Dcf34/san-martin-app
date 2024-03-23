@@ -10,7 +10,7 @@ import { rutasAplicativo } from '../../../core/config/routes.config';
 import { MensajesService } from '../../../core/services/mensajes.service';
 import { cleanParam, cleanParamBool, cleanParamDate, cleanParamNum } from 'src/app/shared/models/functions/params.function';
 import { asignDates, idUserCreacionToObject, idUserModificacionToObject, userIdToObject, userToForm, userToObject, usuarioToObject } from 'src/app/shared/models/functions/user-modification.function';
-import { FiltroUsuario, UsuarioActualizacionDto, UsuarioCreacionDto, UsuarioDto } from '../models/usuario.models';
+import { FiltroUsuario, UsuarioActualizacionDto, UsuarioCreacionDto, UsuarioDto, UsuarioPerfil } from '../models/usuario.models';
 import { PermisoUsuario } from '../models/permiso.models';
 
 
@@ -45,6 +45,15 @@ export class UsuariosService {
     return this.api.getHttp<UsuarioDto[]>(url);
   }
 
+  public getPerfilUsuarios(id_usuario: number) {
+
+    const url = `${this.seccion}/perfil-usuario?`+
+                `id_usuario=${cleanParamNum(id_usuario)}`
+    ;
+
+    return this.api.getHttp<UsuarioPerfil>(url);
+  }
+
   public getPermisosUsuario(id_usuario: number) {
 
     const url = `${this.seccion}/permisos?`+
@@ -52,6 +61,13 @@ export class UsuariosService {
     ;
 
     return this.api.getHttp<PermisoUsuario[]>(url);
+  }
+
+  public actualizarPerfilUsuario(usuario: UsuarioPerfil){
+    const url = `${this.seccion}/actualizar-perfil?`+
+    idUserModificacionToObject(usuario);
+    
+    return this.api.putHttp<Ejecucion>(url, usuario);
   }
 
 
